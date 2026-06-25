@@ -1929,8 +1929,8 @@ private fun AppPickerDialog(
 ) {
     var searchQuery by remember { mutableStateOf("") }
 
-    val sdkApps = rememberFilteredAppList(searchQuery, AppFilter.LAUNCHABLE_ONLY, AppFilter.NO_OVERLAYS)
-    val filtered = sdkApps.value.map { it.packageName to it.label }
+    val sdkApps = rememberFilteredAppList(searchQuery, AppFilter.ALL)
+    val filtered = sdkApps.map { it.packageName to it.label }
 
     AlertDialog(
         onDismissRequest = onDismiss,

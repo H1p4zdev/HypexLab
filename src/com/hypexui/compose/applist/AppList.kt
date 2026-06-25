@@ -1,6 +1,7 @@
 package com.hypexui.compose.applist
 
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.compose.runtime.Composable
@@ -10,7 +11,8 @@ import androidx.compose.ui.platform.LocalContext
 data class AppEntry(
     val packageName: String,
     val label: String,
-    val icon: Drawable?,
+    val icon: Drawable,
+    val isSystem: Boolean = false,
 )
 
 enum class AppFilter { LAUNCHABLE_USER_ONLY, ALL, SYSTEM, USER }
@@ -35,6 +37,7 @@ fun rememberAppList(filter: AppFilter = AppFilter.LAUNCHABLE_USER_ONLY): List<Ap
                 packageName = app.packageName,
                 label = pm.getApplicationLabel(app).toString(),
                 icon = app.loadIcon(pm),
+                isSystem = app.flags and ApplicationInfo.FLAG_SYSTEM != 0,
             )
         }
     }

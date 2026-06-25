@@ -351,7 +351,7 @@ fun AppPickerBottomSheet(onDismiss: () -> Unit) {
     var isLoading by remember { mutableStateOf(true) }
     var showSystemApps by remember { mutableStateOf(false) }
     val allApps = remember { mutableStateListOf<AppEntry>() }
-    val sdkApps = rememberAppList(AppFilter.ALL, AppFilter.NO_OVERLAYS)
+    val sdkApps = rememberAppList(AppFilter.ALL)
 
     fun loadTargetFile(): Map<String, TargetMode> {
         val result = mutableMapOf<String, TargetMode>()
@@ -392,8 +392,8 @@ fun AppPickerBottomSheet(onDismiss: () -> Unit) {
         }
     }
 
-    LaunchedEffect(sdkApps.value, showSystemApps) {
-        val sourceApps = sdkApps.value
+    LaunchedEffect(sdkApps, showSystemApps) {
+        val sourceApps = sdkApps
         if (sourceApps.isEmpty()) return@LaunchedEffect
         withContext(Dispatchers.IO) {
             val targetMap = loadTargetFile()

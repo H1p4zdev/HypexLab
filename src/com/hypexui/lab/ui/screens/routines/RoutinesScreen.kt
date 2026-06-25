@@ -21,7 +21,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.net.Uri
-import android.os.UserHandle
+import android.content.ContentResolver
 import android.provider.Settings
 import android.text.format.DateUtils
 import android.widget.Toast
@@ -328,8 +328,7 @@ private fun RoutinesListContent(
                         stringResource(R.string.routines_export_summary)
                     },
                     icon = Icons.Default.CloudDownload,
-                    enabled = routines.isNotEmpty(),
-                    onClick = onExport,
+    onClick = onExport,
                 )
             }
             item {
@@ -421,16 +420,26 @@ private fun RoutinesListContent(
     }
 }
 
+private fun getSecureStringForUser(context: Context, key: String): String? {
+    return try {
+        val method = Settings.Secure::class.java.getMethod("getStringForUser", ContentResolver::class.java, String::class.java, Int::class.java)
+        method.invoke(null, context.contentResolver, key, 0) as? String
+    } catch (_: Exception) { null }
+}
+
+private fun putSecureStringForUser(context: Context, key: String, value: String) {
+    try {
+        val method = Settings.Secure::class.java.getMethod("putStringForUser", ContentResolver::class.java, String::class.java, String::class.java, Int::class.java)
+        method.invoke(null, context.contentResolver, key, value, 0)
+    } catch (_: Exception) { }
+}
+
 private suspend fun loadRoutines(
     context: Context,
     serializer: RoutineSerializer,
 ): List<Routine> = withContext(Dispatchers.IO) {
     serializer.deserializeRoutines(
-        Settings.Secure.getStringForUser(
-            context.contentResolver,
-            SETTINGS_KEY,
-            UserHandle.USER_CURRENT,
-        ) ?: ""
+        getSecureStringForUser(context, SETTINGS_KEY) ?: ""
     )
 }
 
@@ -439,12 +448,7 @@ private suspend fun persistRoutines(
     serializer: RoutineSerializer,
     routines: List<Routine>,
 ) = withContext(Dispatchers.IO) {
-    Settings.Secure.putStringForUser(
-        context.contentResolver,
-        SETTINGS_KEY,
-        serializer.serializeRoutines(routines),
-        UserHandle.USER_CURRENT,
-    )
+    putSecureStringForUser(context, SETTINGS_KEY, serializer.serializeRoutines(routines))
 }
 
 private suspend fun readRoutinesBackup(

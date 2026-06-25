@@ -430,11 +430,11 @@ fun AppPickerBottomSheet(onDismiss: () -> Unit) {
         }
 
     BottomSheetDialog(
+        visible = true,
         onDismiss = {
             saveTargetFile()
             onDismiss()
         },
-        containerColor = MaterialTheme.colorScheme.surface,
     ) {
         Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Text(

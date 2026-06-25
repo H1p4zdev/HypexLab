@@ -1,12 +1,15 @@
 package com.hypexui.compose.sheet
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun BottomSheetDialog(
     visible: Boolean,
     onDismiss: () -> Unit,

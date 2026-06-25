@@ -123,6 +123,7 @@ fun PreferenceGroup(
 class PreferenceGroupScope {
     private val _items = mutableListOf<@Composable () -> Unit>()
 
+    @Composable
     fun capture(content: @Composable PreferenceGroupScope.() -> Unit): List<@Composable () -> Unit> {
         _items.clear()
         content()

@@ -61,8 +61,6 @@ dependencies {
     // Framework JAR for system APIs (compileOnly — not included in APK)
     // adb pull /system/framework/framework.jar  →  place in libs/
     compileOnly(files("libs/framework.jar"))
-
-    implementation(project(":ax_compose"))
 }
 
 android.sourceSets {

@@ -14,5 +14,3 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "HypexUILab"
-
-include(":ax_compose")

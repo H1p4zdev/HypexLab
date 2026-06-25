@@ -45,7 +45,6 @@ android_app {
         "androidx.lifecycle_lifecycle-runtime-compose",
         "kotlinx-coroutines-core",
         "kotlin-parcelize-runtime",
-        "ax_compose",
         "androidx.graphics_graphics-shapes",
         "miuframework",
     ],

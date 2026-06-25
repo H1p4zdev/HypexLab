@@ -209,8 +209,11 @@ fun PlayIntegrityFixContent(
                             result.pifData.toString(2)
                         )
 
-                        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-                        am.forceStopPackage(VENDING_PACKAGE)
+                        try {
+                            val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+                            val method = ActivityManager::class.java.getMethod("forceStopPackage", String::class.java)
+                            method.invoke(am, VENDING_PACKAGE)
+                        } catch (_: Exception) { }
 
                         Toast.makeText(context, context.getString(R.string.fetched_model, result.model), Toast.LENGTH_SHORT).show()
                         fetchStatus = ""
@@ -244,8 +247,11 @@ fun PlayIntegrityFixContent(
                     val normalized = normalizePifPayload(raw)
                     Settings.Secure.putString(context.contentResolver, PIF_CONFIG_KEY, normalized)
 
-                    val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-                    am.forceStopPackage(VENDING_PACKAGE)
+                    try {
+                        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+                        val method = ActivityManager::class.java.getMethod("forceStopPackage", String::class.java)
+                        method.invoke(am, VENDING_PACKAGE)
+                    } catch (_: Exception) { }
 
                     Toast.makeText(context, context.getString(R.string.imported_as, PIF_CONFIG_NAME), Toast.LENGTH_SHORT).show()
                     refreshStatus()

@@ -59,7 +59,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LoadingIndicator
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SegmentedButton
@@ -167,9 +167,11 @@ fun TrickyStoreContent(modifier: Modifier = Modifier) {
                         val encoded = Base64.encodeToString(bytes, Base64.NO_WRAP)
                         Settings.Secure.putString(context.contentResolver, KEYBOX_KEY, encoded)
 
-                        val am =
-                            context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-                        am.forceStopPackage(VENDING_PACKAGE)
+                        try {
+                            val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+                            val method = ActivityManager::class.java.getMethod("forceStopPackage", String::class.java)
+                            method.invoke(am, VENDING_PACKAGE)
+                        } catch (_: Exception) { }
 
                         Toast.makeText(
                                 context,
@@ -512,7 +514,7 @@ fun AppPickerBottomSheet(onDismiss: () -> Unit) {
                     modifier = Modifier.fillMaxWidth().height(300.dp),
                     contentAlignment = Alignment.Center,
                 ) {
-                    LoadingIndicator()
+                    CircularProgressIndicator()
                 }
             } else {
                 LazyColumn(modifier = Modifier.fillMaxWidth().height(400.dp)) {

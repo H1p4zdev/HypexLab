@@ -289,7 +289,7 @@ fun GameSpoofingContent(modifier: Modifier = Modifier) {
                     Column {
                         Text(
                             text = stringResource(R.string.app_spoofing),
-                            style = MaterialTheme.typography.titleLargeEmphasized,
+                            style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.onSurface,
                         )
                         Text(
@@ -343,7 +343,7 @@ fun GameSpoofingContent(modifier: Modifier = Modifier) {
         if (gameConfigs.isNotEmpty()) {
             Text(
                 text = stringResource(R.string.configured_apps),
-                style = MaterialTheme.typography.labelMediumEmphasized,
+                style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(start = 4.dp, bottom = 8.dp),
             )
@@ -428,7 +428,7 @@ fun GameConfigCard(game: GameConfig, onEdit: () -> Unit, onDelete: () -> Unit) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = game.appName,
-                        style = MaterialTheme.typography.titleMediumEmphasized,
+                        style = MaterialTheme.typography.titleMedium,
                     )
                     Text(
                         text = game.packageName,
@@ -500,7 +500,7 @@ fun AddGameDialog(
     val pm = context.packageManager
     val scope = rememberCoroutineScope()
     var searchQuery by remember { mutableStateOf("") }
-    val filteredApps by rememberFilteredAppList(searchQuery, AppFilter.USER_ONLY, AppFilter.NO_OVERLAYS)
+    val filteredApps by rememberFilteredAppList(searchQuery, AppFilter.LAUNCHABLE_USER_ONLY)
     val configuredPackages = remember(configuredGames) { configuredGames.map { it.packageName }.toSet() }
     val availableApps = remember(filteredApps, configuredPackages) {
         filteredApps.filter { it.packageName !in configuredPackages }
@@ -618,7 +618,7 @@ fun AddGameDialog(
                                     ) {
                                         Text(
                                             text = profile.name,
-                                            style = MaterialTheme.typography.titleSmallEmphasized,
+                                            style = MaterialTheme.typography.titleSmall,
                                             modifier = Modifier.weight(1f),
                                         )
                                         if (profile.isCustom) {
@@ -717,7 +717,7 @@ fun PropertyEditor(props: MutableList<Pair<String, String>>, onAddProp: () -> Un
                     ) {
                         Text(
                             text = stringResource(R.string.property_number, index + 1),
-                            style = MaterialTheme.typography.labelLargeEmphasized,
+                            style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.primary,
                         )
                         IconButton(

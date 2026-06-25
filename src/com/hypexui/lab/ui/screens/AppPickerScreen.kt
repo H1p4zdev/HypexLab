@@ -159,7 +159,7 @@ fun AppPickerScreen(
         (if (customFilter != null) {
             filteredCustomApps
         } else {
-            sdkApps.value.map { entry ->
+            sdkApps.map { entry ->
                 AppInfo(packageName = entry.packageName, label = entry.label, icon = entry.icon)
             }
         }).filterNot { it.packageName in excludedPackages }

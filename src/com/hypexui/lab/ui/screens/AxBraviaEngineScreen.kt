@@ -45,7 +45,9 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -58,7 +60,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.hypexui.lab.R
 import com.hypexui.compose.preferences.SettingsType
-import com.hypexui.compose.preferences.rememberSecureSettingStringState
+import com.hypexui.compose.preferences.rememberSettingsFlow
 import com.hypexui.compose.scaffold.HypexScaffold
 
 private const val LR = 0.2126f
@@ -132,10 +134,12 @@ fun AxBraviaEngineScreen(onBackClick: () -> Unit) {
         title = stringResource(R.string.ax_bravia_engine),
         onBackClick = onBackClick,
     ) { innerPadding ->
-        val (currentMode, setMode) = rememberSecureSettingStringState(
-            key = BRAVIA_KEY,
-            defaultValue = MODE_OFF,
-        )
+        val settingsFlow = rememberSettingsFlow(SettingsType.SECURE)
+        var currentMode by remember { mutableStateOf(settingsFlow.getString(BRAVIA_KEY, MODE_OFF)) }
+        val setMode: (String) -> Unit = { value ->
+            settingsFlow.putString(BRAVIA_KEY, value)
+            currentMode = value
+        }
 
         val colorMatrix = remember(currentMode) { buildColorMatrix(currentMode) }
         val colorFilter = if (currentMode != MODE_OFF) ColorFilter.colorMatrix(colorMatrix) else null

@@ -15,7 +15,6 @@ build/
 *.hprof
 *.jar
 !libs/framework.jar
-/libs/framework.jar
 /external/
 APKEditor.jar
 *.apk

@@ -27,8 +27,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 
     buildFeatures {
@@ -62,7 +62,7 @@ dependencies {
 
     // Framework JAR for system APIs (compileOnly — not included in APK)
     // adb pull /system/framework/framework.jar  →  place in libs/
-    compileOnly(file("libs/framework.jar"))
+    compileOnly(files("libs/framework.jar"))
 
     implementation(project(":ax_compose"))
 }

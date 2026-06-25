@@ -278,66 +278,63 @@ fun TrickyStoreContent(modifier: Modifier = Modifier) {
     ) {
         Spacer(modifier = Modifier.height(8.dp))
 
-        SettingsSection(
-            title = stringResource(R.string.keybox_management),
-            icon = Icons.Default.Key,
-        ) {
-            ClickablePreference(
-                title = stringResource(R.string.import_keybox),
-                summary =
-                    if (keyboxExists) stringResource(R.string.keybox_installed)
-                    else stringResource(R.string.no_keybox_found),
-                icon = Icons.Default.Upload,
-                position = PreferencePosition.Top,
-                onClick = {
-                    val intent =
-                        Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                            addCategory(Intent.CATEGORY_OPENABLE)
-                            type = "*/*"
-                        }
-                    keyboxPicker.launch(intent)
-                },
-            )
+        PreferenceGroup(title = stringResource(R.string.keybox_management)) {
+            item {
+                ClickablePreference(
+                    title = stringResource(R.string.import_keybox),
+                    summary =
+                        if (keyboxExists) stringResource(R.string.keybox_installed)
+                        else stringResource(R.string.no_keybox_found),
+                    icon = Icons.Default.Upload,
+                    onClick = {
+                        val intent =
+                            Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                                addCategory(Intent.CATEGORY_OPENABLE)
+                                type = "*/*"
+                            }
+                        keyboxPicker.launch(intent)
+                    },
+                )
+            }
 
-            ClickablePreference(
-                title = stringResource(R.string.delete_keybox),
-                summary = stringResource(R.string.remove_keybox_file),
-                icon = Icons.Default.Delete,
-                enabled = keyboxExists,
-                position = PreferencePosition.Bottom,
-                onClick = { showDeleteDialog = true },
-            )
+            item {
+                ClickablePreference(
+                    title = stringResource(R.string.delete_keybox),
+                    summary = stringResource(R.string.remove_keybox_file),
+                    icon = Icons.Default.Delete,
+                    onClick = { showDeleteDialog = true },
+                )
+            }
         }
 
-        SettingsSection(
-            title = stringResource(R.string.target_configuration),
-            icon = Icons.Default.Security,
-        ) {
-            ClickablePreference(
-                title = stringResource(R.string.manage_target_apps),
-                summary =
-                    if (targetAppCount > 0)
-                        stringResource(R.string.target_apps_configured, targetAppCount)
-                    else stringResource(R.string.no_apps_configured),
-                icon = Icons.Default.Add,
-                position = PreferencePosition.Top,
-                onClick = { showAppPicker = true },
-            )
+        PreferenceGroup(title = stringResource(R.string.target_configuration)) {
+            item {
+                ClickablePreference(
+                    title = stringResource(R.string.manage_target_apps),
+                    summary =
+                        if (targetAppCount > 0)
+                            stringResource(R.string.target_apps_configured, targetAppCount)
+                        else stringResource(R.string.no_apps_configured),
+                    icon = Icons.Default.Add,
+                    onClick = { showAppPicker = true },
+                )
+            }
 
-            ClickablePreference(
-                title = stringResource(R.string.import_target_list),
-                summary = stringResource(R.string.import_from_file),
-                icon = Icons.Default.Upload,
-                position = PreferencePosition.Bottom,
-                onClick = {
-                    val intent =
-                        Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                            addCategory(Intent.CATEGORY_OPENABLE)
-                            type = "text/*"
-                        }
-                    targetPicker.launch(intent)
-                },
-            )
+            item {
+                ClickablePreference(
+                    title = stringResource(R.string.import_target_list),
+                    summary = stringResource(R.string.import_from_file),
+                    icon = Icons.Default.Upload,
+                    onClick = {
+                        val intent =
+                            Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                                addCategory(Intent.CATEGORY_OPENABLE)
+                                type = "text/*"
+                            }
+                        targetPicker.launch(intent)
+                    },
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))

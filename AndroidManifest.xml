@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hypexui.lab"
-    android:sharedUserId="android.uid.system">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hypexui.lab">
 
     <uses-sdk android:minSdkVersion="31" android:targetSdkVersion="36" />
     

@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 fun HypexScaffold(
     title: String,
     onBackClick: (() -> Unit)? = null,
-    content: @Composable (Modifier) -> Unit,
+    content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -47,8 +47,8 @@ fun HypexScaffold(
         },
         containerColor = MaterialTheme.colorScheme.background,
     ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-            content(Modifier)
+        Column(modifier = Modifier.fillMaxSize()) {
+            content(innerPadding)
         }
     }
 }

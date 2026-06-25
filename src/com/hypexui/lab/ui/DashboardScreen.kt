@@ -17,8 +17,11 @@
 package com.hypexui.lab.ui
 
 import android.app.Activity
+import android.app.WallpaperManager
 import android.content.ComponentName
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.provider.Settings
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
@@ -48,11 +51,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.roundToPx
 import androidx.compose.ui.unit.sp
 import com.hypexui.lab.R
 import com.hypexui.lab.ui.components.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.hypexui.lab.ui.screens.*
 import com.hypexui.lab.ui.screens.routines.RoutinesScreen
 import com.hypexui.lab.ui.theme.MaxContentWidth
@@ -223,9 +227,9 @@ private fun DashboardContent(
     HypexScaffold(
         title = stringResource(R.string.personalizations),
         onBackClick = { activity?.finish() },
-    ) { innerPadding ->
+    ) { modifier ->
         Box(
-            modifier = Modifier.fillMaxSize().padding(innerPadding),
+            modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.TopCenter,
         ) {
             Column(
@@ -485,8 +489,8 @@ private fun WallpaperCard(
         val drawable = wallpaperManager.drawable
         val bitmap = (drawable as? BitmapDrawable)?.bitmap
         if (bitmap != null) {
-            val maxW = with(density) { 400.dp.roundToPx() }
-            val maxH = with(density) { 600.dp.roundToPx() }
+            val maxW = with(density) { (400.dp.toPx()).toInt() }
+            val maxH = with(density) { (600.dp.toPx()).toInt() }
             wallpaperImage =
                 withContext(Dispatchers.Default) {
                     val s =
@@ -676,9 +680,9 @@ fun ComingSoonScreen(onBackClick: () -> Unit) {
     HypexScaffold(
         title = stringResource(R.string.coming_soon),
         onBackClick = { onBackClick() },
-    ) { innerPadding ->
+    ) { modifier ->
         Box(
-            modifier = Modifier.fillMaxSize().padding(innerPadding),
+            modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.Center,
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {

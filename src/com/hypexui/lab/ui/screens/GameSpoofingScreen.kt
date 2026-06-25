@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
-
 package com.hypexui.lab.ui.screens
 
 import android.content.Context

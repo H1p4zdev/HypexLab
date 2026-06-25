@@ -17,7 +17,6 @@
 package com.hypexui.lab.ui.components
 
 import androidx.compose.animation.core.*
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.*
 import androidx.compose.foundation.layout.*
@@ -80,7 +79,6 @@ fun BottomNavBar(
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun NavPill(
     item: NavItem,
@@ -90,19 +88,18 @@ private fun NavPill(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val motionScheme = MaterialTheme.motionScheme
 
     val scale by
         animateFloatAsState(
             targetValue = if (isPressed) 0.95f else 1f,
-            animationSpec = motionScheme.fastSpatialSpec(),
+            animationSpec = spring(dampingRatio = 0.8f, stiffness = 400f),
             label = "scale",
         )
 
     val labelAlpha by
         animateFloatAsState(
             targetValue = if (isSelected) 1f else 0f,
-            animationSpec = motionScheme.fastEffectsSpec(),
+            animationSpec = tween(350),
             label = "labelAlpha",
         )
 

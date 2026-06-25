@@ -681,7 +681,6 @@ fun SwitchFeatureCard(
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun IllustratedCard(
     title: String,
@@ -693,11 +692,10 @@ fun IllustratedCard(
     val colors = MaterialTheme.colorScheme
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val motionScheme = MaterialTheme.motionScheme
     val scale by
         animateFloatAsState(
             targetValue = if (isPressed) 0.97f else 1f,
-            animationSpec = motionScheme.defaultSpatialSpec(),
+            animationSpec = spring(dampingRatio = 0.8f, stiffness = 400f),
             label = "scale",
         )
 
@@ -745,7 +743,6 @@ fun IllustratedCard(
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun VisualCard(
     title: String,
@@ -756,11 +753,10 @@ fun VisualCard(
     val colors = MaterialTheme.colorScheme
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val motionScheme = MaterialTheme.motionScheme
     val scale by
         animateFloatAsState(
             targetValue = if (isPressed) 0.97f else 1f,
-            animationSpec = motionScheme.defaultSpatialSpec(),
+            animationSpec = spring(dampingRatio = 0.8f, stiffness = 400f),
             label = "scale",
         )
 
@@ -791,7 +787,7 @@ fun VisualCard(
             ) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleSmallEmphasized,
+                    style = MaterialTheme.typography.titleSmall,
                     color = colors.onSurface,
                     modifier = Modifier.weight(1f),
                 )
@@ -806,7 +802,6 @@ fun VisualCard(
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun DashboardCard(
     title: String,
@@ -817,11 +812,10 @@ fun DashboardCard(
     val colors = MaterialTheme.colorScheme
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val motionScheme = MaterialTheme.motionScheme
     val scale by
         animateFloatAsState(
             targetValue = if (isPressed) 0.97f else 1f,
-            animationSpec = motionScheme.defaultSpatialSpec(),
+            animationSpec = spring(dampingRatio = 0.8f, stiffness = 400f),
             label = "scale",
         )
 

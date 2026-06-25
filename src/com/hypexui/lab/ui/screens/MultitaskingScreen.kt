@@ -24,7 +24,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
@@ -54,7 +53,6 @@ import com.hypexui.lab.R
 import com.hypexui.lab.ui.components.FeatureCard
 import com.hypexui.compose.scaffold.HypexScaffold
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun MultitaskingScreen(onBackClick: (() -> Unit)? = null) {
     var currentSubScreen by rememberSaveable { mutableStateOf<String?>(null) }
@@ -63,17 +61,16 @@ fun MultitaskingScreen(onBackClick: (() -> Unit)? = null) {
         BackHandler { currentSubScreen = null }
     }
 
-    val motionScheme = MaterialTheme.motionScheme
     AnimatedContent(
         targetState = currentSubScreen,
         transitionSpec = {
             if (targetState != null) {
-                (slideInHorizontally(motionScheme.defaultSpatialSpec()) { it } + fadeIn(motionScheme.defaultEffectsSpec())).togetherWith(
-                    slideOutHorizontally(motionScheme.defaultSpatialSpec()) { -it / 3 } + fadeOut(motionScheme.defaultEffectsSpec())
+                (slideInHorizontally { it } + fadeIn()).togetherWith(
+                    slideOutHorizontally { -it / 3 } + fadeOut()
                 )
             } else {
-                (slideInHorizontally(motionScheme.defaultSpatialSpec()) { -it / 3 } + fadeIn(motionScheme.defaultEffectsSpec())).togetherWith(
-                    slideOutHorizontally(motionScheme.defaultSpatialSpec()) { it } + fadeOut(motionScheme.defaultEffectsSpec())
+                (slideInHorizontally { -it / 3 } + fadeIn()).togetherWith(
+                    slideOutHorizontally { it } + fadeOut()
                 )
             }
         },

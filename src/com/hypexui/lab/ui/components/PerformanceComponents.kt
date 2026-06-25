@@ -20,7 +20,7 @@ import android.provider.Settings
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -71,7 +71,6 @@ import kotlin.math.roundToInt
 
 private const val POWER_MODE_KEY = "power_supersave_mode_open"
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun PowerModeToggle(modifier: Modifier = Modifier) {
     val context = LocalContext.current
@@ -90,13 +89,12 @@ fun PowerModeToggle(modifier: Modifier = Modifier) {
             label = "scale",
         )
 
-    val motionScheme = MaterialTheme.motionScheme
     val containerColor by
         animateColorAsState(
             targetValue =
                 if (isEnabled) MaterialTheme.colorScheme.primary
                 else MaterialTheme.colorScheme.surfaceBright,
-            animationSpec = motionScheme.defaultEffectsSpec(),
+            animationSpec = tween(350),
             label = "containerColor",
         )
 
@@ -105,14 +103,14 @@ fun PowerModeToggle(modifier: Modifier = Modifier) {
             targetValue =
                 if (isEnabled) MaterialTheme.colorScheme.onPrimary
                 else MaterialTheme.colorScheme.onSurface,
-            animationSpec = motionScheme.defaultEffectsSpec(),
+            animationSpec = tween(350),
             label = "contentColor",
         )
 
     val iconRotation by
         animateFloatAsState(
             targetValue = if (isEnabled) 360f else 0f,
-            animationSpec = motionScheme.defaultSpatialSpec(),
+            animationSpec = spring(dampingRatio = 0.8f, stiffness = 400f),
             label = "iconRotation",
         )
 
@@ -121,7 +119,7 @@ fun PowerModeToggle(modifier: Modifier = Modifier) {
             targetValue =
                 if (isEnabled) MaterialTheme.colorScheme.primary
                 else MaterialTheme.colorScheme.outlineVariant,
-            animationSpec = motionScheme.defaultEffectsSpec(),
+            animationSpec = tween(350),
             label = "statusColor",
         )
 
@@ -179,7 +177,6 @@ fun PowerModeToggle(modifier: Modifier = Modifier) {
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun BoostToggleCard(
     settingKey: String,
@@ -202,13 +199,12 @@ fun BoostToggleCard(
             label = "scale",
         )
 
-    val motionScheme = MaterialTheme.motionScheme
     val containerColor by
         animateColorAsState(
             targetValue =
                 if (isEnabled) MaterialTheme.colorScheme.primary
                 else MaterialTheme.colorScheme.surfaceBright,
-            animationSpec = motionScheme.defaultEffectsSpec(),
+            animationSpec = tween(350),
             label = "containerColor",
         )
 
@@ -217,7 +213,7 @@ fun BoostToggleCard(
             targetValue =
                 if (isEnabled) MaterialTheme.colorScheme.onPrimary
                 else MaterialTheme.colorScheme.onSurface,
-            animationSpec = motionScheme.defaultEffectsSpec(),
+            animationSpec = tween(350),
             label = "contentColor",
         )
 
@@ -233,7 +229,7 @@ fun BoostToggleCard(
             targetValue =
                 if (isEnabled) MaterialTheme.colorScheme.primary
                 else MaterialTheme.colorScheme.outlineVariant,
-            animationSpec = motionScheme.defaultEffectsSpec(),
+            animationSpec = tween(350),
             label = "statusColor",
         )
 

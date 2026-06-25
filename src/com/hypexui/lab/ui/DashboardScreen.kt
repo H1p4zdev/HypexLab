@@ -43,20 +43,23 @@ import androidx.compose.ui.*
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.roundToPx
 import androidx.compose.ui.unit.sp
 import com.hypexui.lab.R
 import com.hypexui.lab.ui.components.*
+import kotlinx.coroutines.launch
 import com.hypexui.lab.ui.screens.*
 import com.hypexui.lab.ui.screens.routines.RoutinesScreen
 import com.hypexui.lab.ui.theme.MaxContentWidth
 import com.hypexui.compose.preferences.*
 import com.hypexui.compose.scaffold.HypexScaffold
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen() {
     val windowSizeClass = rememberWindowSizeClass()
@@ -118,8 +121,6 @@ fun DashboardScreen() {
         }
     }
 
-    val motionScheme = MaterialTheme.motionScheme
-
     val appPickerCallback: (Set<String>) -> Unit = { selectedApps ->
         navigateToAppPicker(
             titleRes = R.string.select_essential_apps,
@@ -175,12 +176,12 @@ fun DashboardScreen() {
             targetState = currentDetailScreen,
             transitionSpec = {
                 if (detailTransitionForward) {
-                    (slideInHorizontally(motionScheme.defaultSpatialSpec()) { it } + fadeIn(motionScheme.defaultEffectsSpec())).togetherWith(
-                        slideOutHorizontally(motionScheme.defaultSpatialSpec()) { -it / 3 } + fadeOut(motionScheme.defaultEffectsSpec())
+                    (slideInHorizontally { it } + fadeIn()).togetherWith(
+                        slideOutHorizontally { -it / 3 } + fadeOut()
                     )
                 } else {
-                    (slideInHorizontally(motionScheme.defaultSpatialSpec()) { -it / 3 } + fadeIn(motionScheme.defaultEffectsSpec())).togetherWith(
-                        slideOutHorizontally(motionScheme.defaultSpatialSpec()) { it } + fadeOut(motionScheme.defaultEffectsSpec())
+                    (slideInHorizontally { -it / 3 } + fadeIn()).togetherWith(
+                        slideOutHorizontally { it } + fadeOut()
                     )
                 }
             },
@@ -461,7 +462,6 @@ private fun ManagedAppPickerScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun WallpaperCard(
     title: String,
@@ -470,13 +470,12 @@ private fun WallpaperCard(
 ) {
     val context = LocalContext.current
     val density = LocalDensity.current
-    val motionScheme = MaterialTheme.motionScheme
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val scale by
         animateFloatAsState(
             targetValue = if (isPressed) 0.97f else 1f,
-            animationSpec = motionScheme.defaultSpatialSpec(),
+            animationSpec = spring(dampingRatio = 0.8f, stiffness = 400f),
             label = "scale",
         )
 

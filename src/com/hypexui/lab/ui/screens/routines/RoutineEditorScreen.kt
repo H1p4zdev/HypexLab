@@ -966,6 +966,7 @@ private fun TriggerConfigDialog(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ActionConfigDialog(
     type: String,
@@ -2392,6 +2393,7 @@ private fun IntentExtrasEditor(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun IntentExtraRow(
     key: String,

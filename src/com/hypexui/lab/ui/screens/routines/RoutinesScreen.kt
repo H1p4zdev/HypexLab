@@ -38,6 +38,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -484,6 +485,7 @@ private fun createRoutinesExportIntent(): Intent = Intent(Intent.ACTION_CREATE_D
     putExtra(Intent.EXTRA_TITLE, ROUTINES_BACKUP_FILE_NAME)
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun RoutineCard(
     routine: Routine,

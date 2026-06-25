@@ -30,8 +30,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -228,9 +228,9 @@ private fun DashboardContent(
     HypexScaffold(
         title = stringResource(R.string.personalizations),
         onBackClick = { activity?.finish() },
-    ) { modifier ->
+    ) { innerPadding ->
         Box(
-            modifier = modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(innerPadding),
             contentAlignment = Alignment.TopCenter,
         ) {
             Column(
@@ -681,9 +681,9 @@ fun ComingSoonScreen(onBackClick: () -> Unit) {
     HypexScaffold(
         title = stringResource(R.string.coming_soon),
         onBackClick = { onBackClick() },
-    ) { modifier ->
+    ) { innerPadding ->
         Box(
-            modifier = modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(innerPadding),
             contentAlignment = Alignment.Center,
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {

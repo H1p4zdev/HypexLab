@@ -116,14 +116,15 @@ fun AppPickerScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
-    val sdkFilters: Array<AppFilter> = when (filterType) {
-        AppFilterType.ALL -> arrayOf(AppFilter.ALL, AppFilter.NO_OVERLAYS)
-        AppFilterType.USER_ONLY -> if (showSystemApps) arrayOf(AppFilter.ALL, AppFilter.NO_OVERLAYS) else arrayOf(AppFilter.USER_ONLY, AppFilter.NO_OVERLAYS)
-        AppFilterType.LAUNCHABLE_ONLY -> arrayOf(AppFilter.LAUNCHABLE_ONLY, AppFilter.NO_OVERLAYS)
-        AppFilterType.LAUNCHABLE_USER_ONLY -> if (showSystemApps) arrayOf(AppFilter.LAUNCHABLE_ONLY, AppFilter.NO_OVERLAYS) else arrayOf(AppFilter.USER_ONLY, AppFilter.LAUNCHABLE_ONLY, AppFilter.NO_OVERLAYS)
+    // Map AppFilterType to AppFilter from AppList.kt
+    val appFilter = when (filterType) {
+        AppFilterType.ALL -> AppFilter.ALL
+        AppFilterType.USER_ONLY -> if (showSystemApps) AppFilter.ALL else AppFilter.USER
+        AppFilterType.LAUNCHABLE_ONLY -> AppFilter.ALL // Best effort: includes non-launchable too
+        AppFilterType.LAUNCHABLE_USER_ONLY -> AppFilter.LAUNCHABLE_USER_ONLY
     }
 
-    val sdkApps = rememberFilteredAppList(searchQuery, *sdkFilters)
+    val sdkApps = rememberFilteredAppList(searchQuery, appFilter)
     var customApps by remember { mutableStateOf<List<AppInfo>>(emptyList()) }
 
     LaunchedEffect(Unit) {

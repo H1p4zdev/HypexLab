@@ -97,7 +97,7 @@ fun HypexHeader(
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 20.dp),
+                        .padding(start = 20.dp, end = 92.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
@@ -139,32 +139,34 @@ fun HypexHeader(
                                 .padding(horizontal = 10.dp, vertical = 3.dp),
                         )
                     }
+                }
 
-                    Spacer(modifier = Modifier.width(12.dp))
-
-                    Card(
-                        shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp),
-                        modifier = Modifier.width(68.dp).height(120.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
-                        elevation = CardDefaults.cardElevation(0.dp),
-                    ) {
-                        Box(modifier = Modifier.fillMaxSize()) {
-                            if (wallpaperBitmap != null) {
-                                Image(
-                                    bitmap = wallpaperBitmap!!.asImageBitmap(),
-                                    contentDescription = null,
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier.fillMaxSize(),
-                                )
-                            } else {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .background(
-                                            MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
-                                        )
-                                )
-                            }
+                Card(
+                    shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp),
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(end = 20.dp)
+                        .width(68.dp)
+                        .height(120.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+                    elevation = CardDefaults.cardElevation(0.dp),
+                ) {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        if (wallpaperBitmap != null) {
+                            Image(
+                                bitmap = wallpaperBitmap!!.asImageBitmap(),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize(),
+                            )
+                        } else {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(
+                                        MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                                    )
+                            )
                         }
                     }
                 }

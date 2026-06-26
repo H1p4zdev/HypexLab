@@ -68,7 +68,7 @@ fun CreditsScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            DeviceInfoCard()
+            DeviceInfoCards()
 
             Spacer(modifier = Modifier.height(12.dp))
 
@@ -177,33 +177,6 @@ private fun HeroLogoCard() {
 }
 
 @Composable
-private fun DeviceInfoCard() {
-    val colors = MaterialTheme.colorScheme
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = colors.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-        ) {
-            Text(
-                text = "Device Info",
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.SemiBold,
-                color = colors.onSurfaceVariant,
-                modifier = Modifier.padding(start = 8.dp, bottom = 12.dp),
-            )
-            deviceInfoRow("Device", android.os.Build.DEVICE)
-            deviceInfoRow("Android", android.os.Build.VERSION.RELEASE)
-            deviceInfoRow("Build", android.os.Build.VERSION.INCREMENTAL)
-            deviceInfoRow("Chipset", android.os.Build.HARDWARE)
-        }
-    }
-}
-
-@Composable
 private fun CreditCard(
     title: String,
     subtitle: String,
@@ -259,25 +232,5 @@ private fun CreditCard(
                 modifier = Modifier.size(18.dp),
             )
         }
-    }
-}
-
-@Composable
-private fun deviceInfoRow(label: String, value: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp, horizontal = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Medium,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
     }
 }

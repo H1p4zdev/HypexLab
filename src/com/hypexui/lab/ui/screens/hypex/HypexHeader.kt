@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,6 +38,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -55,6 +55,7 @@ fun HypexHeader(
 ) {
     val context = LocalContext.current
     var wallpaperBitmap by remember { mutableStateOf<Bitmap?>(null) }
+    val evolveFont = FontFamily(Font(R.font.evolve))
 
     LaunchedEffect(Unit) {
         wallpaperBitmap = withContext(Dispatchers.IO) {
@@ -125,11 +126,12 @@ fun HypexHeader(
                         }
                         Text(
                             text = android.os.Build.VERSION.INCREMENTAL,
-                            fontFamily = FontFamily.Default,
+                            fontFamily = evolveFont,
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.White,
                             modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
                                 .background(
                                     Color(0x711F1F1F),
                                     RoundedCornerShape(8.dp),
@@ -141,9 +143,8 @@ fun HypexHeader(
                     Spacer(modifier = Modifier.width(12.dp))
 
                     Card(
-                        shape = RoundedCornerShape(14.dp),
-                        modifier = Modifier.size(80.dp),
-                        border = BorderStroke(3.dp, MaterialTheme.colorScheme.primary),
+                        shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp),
+                        modifier = Modifier.width(68.dp).height(120.dp),
                         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
                         elevation = CardDefaults.cardElevation(0.dp),
                     ) {

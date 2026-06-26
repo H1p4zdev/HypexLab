@@ -55,6 +55,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hypexui.lab.R
+import java.util.Calendar
 import com.hypexui.lab.ui.components.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -245,7 +246,7 @@ private fun DashboardContent(
             ) {
                 val scaleIn = remember { Animatable(0.9f) }
                 val alphaIn = remember { Animatable(0f) }
-                val rowOffsets = remember { List(4) { Animatable(24f) } }
+                val rowOffsets = remember { List(5) { Animatable(24f) } }
                 LaunchedEffect(Unit) {
                     launch { scaleIn.animateTo(1f, tween(400, easing = FastOutSlowInEasing)) }
                     launch { alphaIn.animateTo(1f, tween(300, easing = FastOutSlowInEasing)) }
@@ -266,6 +267,10 @@ private fun DashboardContent(
                     alpha = if (alphaIn.value > 0.5f) 1f else alphaIn.value * 2f
                 }
 
+                GreetingCard(modifier = Modifier.fillMaxWidth().then(rowAnim(0)))
+
+                Spacer(modifier = Modifier.height(16.dp))
+
                 VisualCard(
                     title = stringResource(R.string.themes),
                     onClick = {
@@ -280,38 +285,9 @@ private fun DashboardContent(
                             }
                         runCatching { context.startActivity(intent) }
                     },
-                    modifier = Modifier.fillMaxWidth().height(148.dp).then(rowAnim(0)),
+                    modifier = Modifier.fillMaxWidth().height(148.dp).then(rowAnim(1)),
                 ) {
                     ThemesIllustration()
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(1)),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    DashboardCard(
-                        title = stringResource(R.string.routines),
-                        icon = Icons.Filled.AutoMode,
-                        accentColor = Color(0xFF7C4DFF),
-                        onClick = { onNavigateToDetail("routines") },
-                        modifier = Modifier.weight(1f),
-                    )
-                    DashboardCard(
-                        title = stringResource(R.string.essentials),
-                        icon = Icons.Filled.Workspaces,
-                        accentColor = Color(0xFF1678FF),
-                        onClick = { onNavigateToDetail("essentials") },
-                        modifier = Modifier.weight(1f),
-                    )
-                    DashboardCard(
-                        title = stringResource(R.string.performance),
-                        icon = Icons.Filled.Bolt,
-                        accentColor = Color(0xFFFF3D00),
-                        onClick = { onNavigateToDetail("performance") },
-                        modifier = Modifier.weight(1f),
-                    )
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -321,25 +297,28 @@ private fun DashboardContent(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
-                        title = stringResource(R.string.multitasking),
-                        icon = Icons.Filled.Splitscreen,
-                        accentColor = Color(0xFF9C27B0),
-                        onClick = { onNavigateToDetail("multitasking") },
+                        title = stringResource(R.string.routines),
+                        icon = Icons.Filled.AutoMode,
+                        accentColor = Color(0xFF7C4DFF),
+                        onClick = { onNavigateToDetail("routines") },
                         modifier = Modifier.weight(1f),
+                        shapeIndex = 0,
                     )
                     DashboardCard(
-                        title = "Customize",
-                        icon = Icons.Filled.Palette,
-                        accentColor = Color(0xFF00BCD4),
-                        onClick = { onNavigateToDetail("customize") },
+                        title = stringResource(R.string.essentials),
+                        icon = Icons.Filled.Workspaces,
+                        accentColor = Color(0xFF1678FF),
+                        onClick = { onNavigateToDetail("essentials") },
                         modifier = Modifier.weight(1f),
+                        shapeIndex = 1,
                     )
                     DashboardCard(
-                        title = "Extra Mods",
-                        icon = Icons.Filled.Extension,
-                        accentColor = Color(0xFFFF9800),
-                        onClick = { onNavigateToDetail("hypex_extra") },
+                        title = stringResource(R.string.performance),
+                        icon = Icons.Filled.Bolt,
+                        accentColor = Color(0xFFFF3D00),
+                        onClick = { onNavigateToDetail("performance") },
                         modifier = Modifier.weight(1f),
+                        shapeIndex = 2,
                     )
                 }
 
@@ -350,11 +329,44 @@ private fun DashboardContent(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
+                        title = stringResource(R.string.multitasking),
+                        icon = Icons.Filled.Splitscreen,
+                        accentColor = Color(0xFF9C27B0),
+                        onClick = { onNavigateToDetail("multitasking") },
+                        modifier = Modifier.weight(1f),
+                        shapeIndex = 3,
+                    )
+                    DashboardCard(
+                        title = "Customize",
+                        icon = Icons.Filled.Palette,
+                        accentColor = Color(0xFF00BCD4),
+                        onClick = { onNavigateToDetail("customize") },
+                        modifier = Modifier.weight(1f),
+                        shapeIndex = 4,
+                    )
+                    DashboardCard(
+                        title = "Extra Mods",
+                        icon = Icons.Filled.Extension,
+                        accentColor = Color(0xFFFF9800),
+                        onClick = { onNavigateToDetail("hypex_extra") },
+                        modifier = Modifier.weight(1f),
+                        shapeIndex = 5,
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(4)),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    DashboardCard(
                         title = "Shortcuts",
                         icon = Icons.Filled.Link,
                         accentColor = Color(0xFF4CAF50),
                         onClick = { onNavigateToDetail("hypex_hidden") },
                         modifier = Modifier.weight(1f),
+                        shapeIndex = 6,
                     )
                     DashboardCard(
                         title = "Credits",
@@ -362,6 +374,7 @@ private fun DashboardContent(
                         accentColor = Color(0xFF607D8B),
                         onClick = { onNavigateToDetail("hypex_credit") },
                         modifier = Modifier.weight(1f),
+                        shapeIndex = 7,
                     )
                     Spacer(modifier = Modifier.weight(1f))
                 }
@@ -786,6 +799,65 @@ fun ComingSoonScreen(onBackClick: () -> Unit) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(horizontal = 32.dp),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun GreetingCard(modifier: Modifier = Modifier) {
+    val colors = MaterialTheme.colorScheme
+    val calendar = remember { Calendar.getInstance() }
+    val hour = calendar.get(Calendar.HOUR_OF_DAY)
+    val greeting = when {
+        hour < 12 -> "Good Morning"
+        hour < 17 -> "Good Afternoon"
+        else -> "Good Evening"
+    }
+    val icon = when {
+        hour < 12 -> Icons.Filled.WbSunny
+        hour < 17 -> Icons.Filled.LightMode
+        else -> Icons.Filled.DarkMode
+    }
+
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(20.dp),
+        color = colors.primaryContainer,
+        tonalElevation = 0.dp,
+        shadowElevation = 0.dp,
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 18.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = greeting,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = colors.onPrimaryContainer,
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "Welcome to HypexLab",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = colors.onPrimaryContainer.copy(alpha = 0.7f),
+                )
+            }
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(colors.onPrimaryContainer.copy(alpha = 0.1f)),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = colors.onPrimaryContainer,
+                    modifier = Modifier.size(28.dp),
                 )
             }
         }

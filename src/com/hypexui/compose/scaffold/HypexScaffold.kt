@@ -36,7 +36,12 @@ fun HypexScaffold(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            Column {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp))
+                    .background(MaterialTheme.colorScheme.surface),
+            ) {
                 TopAppBar(
                     title = {
                         Text(
@@ -60,21 +65,6 @@ fun HypexScaffold(
                         titleContentColor = MaterialTheme.colorScheme.onSurface,
                         scrolledContainerColor = MaterialTheme.colorScheme.surface,
                     ),
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(2.dp)
-                        .padding(horizontal = 16.dp)
-                        .clip(RoundedCornerShape(1.dp))
-                        .background(
-                            Brush.horizontalGradient(
-                                listOf(
-                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
-                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                                )
-                            )
-                        ),
                 )
             }
         },

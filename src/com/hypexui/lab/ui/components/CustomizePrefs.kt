@@ -802,6 +802,18 @@ fun VisualCard(
     }
 }
 
+private val cardShapes = listOf(
+    RoundedCornerShape(24.dp, 12.dp, 24.dp, 12.dp),
+    RoundedCornerShape(12.dp, 24.dp, 12.dp, 24.dp),
+    RoundedCornerShape(18.dp, 30.dp, 12.dp, 24.dp),
+    RoundedCornerShape(30.dp, 18.dp, 24.dp, 12.dp),
+    RoundedCornerShape(26.dp, 14.dp, 18.dp, 28.dp),
+    RoundedCornerShape(14.dp, 26.dp, 28.dp, 18.dp),
+    RoundedCornerShape(20.dp, 20.dp, 28.dp, 14.dp),
+    RoundedCornerShape(28.dp, 16.dp, 16.dp, 28.dp),
+    RoundedCornerShape(16.dp, 28.dp, 20.dp, 20.dp),
+)
+
 @Composable
 fun DashboardCard(
     title: String,
@@ -810,14 +822,16 @@ fun DashboardCard(
     modifier: Modifier = Modifier,
     accentColor: Color = MaterialTheme.colorScheme.primary,
     summary: String? = null,
+    shapeIndex: Int = 0,
 ) {
     val colors = MaterialTheme.colorScheme
+    val shape = remember(shapeIndex) { cardShapes[shapeIndex % cardShapes.size] }
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val scale by
         animateFloatAsState(
-            targetValue = if (isPressed) 0.96f else 1f,
-            animationSpec = spring(dampingRatio = 0.6f, stiffness = 450f),
+            targetValue = if (isPressed) 0.95f else 1f,
+            animationSpec = spring(dampingRatio = 0.7f, stiffness = 500f),
             label = "scale",
         )
 
@@ -828,12 +842,11 @@ fun DashboardCard(
                 .graphicsLayer {
                     scaleX = scale
                     scaleY = scale
-                    shadowElevation = if (isPressed) 2f else 6f
                 },
-        shape = RoundedCornerShape(28.dp),
+        shape = shape,
         color = colors.surface,
-        tonalElevation = if (isPressed) 2.dp else 6.dp,
-        shadowElevation = if (isPressed) 2.dp else 6.dp,
+        tonalElevation = 0.dp,
+        shadowElevation = 0.dp,
         onClick = onClick,
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -877,7 +890,7 @@ fun DashboardCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(3.dp)
-                    .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
+                    .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
                     .background(
                         Brush.horizontalGradient(listOf(accentColor, accentColor.copy(alpha = 0.3f)))
                     )

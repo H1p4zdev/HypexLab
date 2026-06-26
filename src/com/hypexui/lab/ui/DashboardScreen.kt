@@ -305,7 +305,7 @@ private fun DashboardContent(
                     icon = Icons.Filled.Workspaces,
                     accentColor = Color(0xFF1678FF),
                     onClick = { onNavigateToDetail("essentials") },
-                    modifier = Modifier.fillMaxWidth().height(172.dp).then(rowAnim(3)),
+                    modifier = Modifier.fillMaxWidth().height(120.dp).then(rowAnim(3)),
                     shapeIndex = 0,
                 )
 
@@ -321,7 +321,7 @@ private fun DashboardContent(
                         icon = Icons.Filled.AutoMode,
                         accentColor = Color(0xFF7C4DFF),
                         onClick = { onNavigateToDetail("routines") },
-                        modifier = Modifier.weight(1f).aspectRatio(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(0.85f),
                         shapeIndex = 1,
                     )
                     DashboardCard(
@@ -330,7 +330,7 @@ private fun DashboardContent(
                         icon = Icons.Filled.Bolt,
                         accentColor = Color(0xFFFF3D00),
                         onClick = { onNavigateToDetail("performance") },
-                        modifier = Modifier.weight(1f).aspectRatio(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(0.85f),
                         shapeIndex = 2,
                     )
                 }
@@ -343,7 +343,7 @@ private fun DashboardContent(
                     icon = Icons.Filled.Palette,
                     accentColor = Color(0xFF00BCD4),
                     onClick = { onNavigateToDetail("customize") },
-                    modifier = Modifier.fillMaxWidth().height(172.dp).then(rowAnim(5)),
+                    modifier = Modifier.fillMaxWidth().height(120.dp).then(rowAnim(5)),
                     shapeIndex = 3,
                 )
 
@@ -359,7 +359,7 @@ private fun DashboardContent(
                         icon = Icons.Filled.Splitscreen,
                         accentColor = Color(0xFF9C27B0),
                         onClick = { onNavigateToDetail("multitasking") },
-                        modifier = Modifier.weight(1f).aspectRatio(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(1.4f),
                         shapeIndex = 4,
                     )
                     DashboardCard(
@@ -368,7 +368,7 @@ private fun DashboardContent(
                         icon = Icons.Filled.Extension,
                         accentColor = Color(0xFFFF9800),
                         onClick = { onNavigateToDetail("hypex_extra") },
-                        modifier = Modifier.weight(1f).aspectRatio(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(1.4f),
                         shapeIndex = 5,
                     )
                 }
@@ -385,7 +385,7 @@ private fun DashboardContent(
                         icon = Icons.Filled.Link,
                         accentColor = Color(0xFF4CAF50),
                         onClick = { onNavigateToDetail("hypex_hidden") },
-                        modifier = Modifier.weight(1f).aspectRatio(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(0.85f),
                         shapeIndex = 6,
                     )
                     DashboardCard(
@@ -394,7 +394,7 @@ private fun DashboardContent(
                         icon = Icons.Filled.Info,
                         accentColor = Color(0xFF607D8B),
                         onClick = { onNavigateToDetail("hypex_credit") },
-                        modifier = Modifier.weight(1f).aspectRatio(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(0.85f),
                         shapeIndex = 7,
                     )
                 }

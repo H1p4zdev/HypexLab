@@ -823,7 +823,7 @@ private fun GreetingCard(modifier: Modifier = Modifier) {
 
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(16.dp),
         color = colors.primaryContainer,
         tonalElevation = 0.dp,
         shadowElevation = 0.dp,
@@ -850,13 +850,13 @@ private fun GreetingCard(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(48.dp)
                     .clip(CircleShape)
-                    .background(colors.onPrimaryContainer.copy(alpha = 0.1f)),
+                    .background(colors.primary),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
-                    tint = colors.onPrimaryContainer,
+                    tint = colors.onPrimary,
                     modifier = Modifier.size(28.dp),
                 )
             }

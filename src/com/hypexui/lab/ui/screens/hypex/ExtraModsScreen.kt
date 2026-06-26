@@ -44,7 +44,8 @@ fun ExtraModsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp),
         ) {
             HypexHeader(subtitle = "Some Useful Features and Customizations")
 

@@ -40,7 +40,8 @@ fun SystemShortcutsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp),
         ) {
             HypexHeader(subtitle = "Enable Some Useful System Settings and Shortcuts")
 

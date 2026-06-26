@@ -242,16 +242,27 @@ private fun DashboardContent(
                         .verticalScroll(scrollState)
                         .padding(horizontal = 24.dp),
             ) {
-                val scaleIn = remember { Animatable(0.85f) }
+                val scaleIn = remember { Animatable(0.9f) }
                 val alphaIn = remember { Animatable(0f) }
+                val rowOffsets = remember { List(4) { Animatable(24f) } }
                 LaunchedEffect(Unit) {
-                    launch { scaleIn.animateTo(1f, tween(500, easing = FastOutSlowInEasing)) }
-                    launch { alphaIn.animateTo(1f, tween(350, easing = FastOutSlowInEasing)) }
+                    launch { scaleIn.animateTo(1f, tween(400, easing = FastOutSlowInEasing)) }
+                    launch { alphaIn.animateTo(1f, tween(300, easing = FastOutSlowInEasing)) }
+                    rowOffsets.forEachIndexed { i, anim ->
+                        launch {
+                            delay(i * 60L)
+                            anim.animateTo(0f, spring(dampingRatio = 0.7f, stiffness = 300f))
+                        }
+                    }
                 }
                 val revealModifier = Modifier.graphicsLayer {
                     scaleX = scaleIn.value
                     scaleY = scaleIn.value
                     alpha = alphaIn.value
+                }
+                fun rowAnim(index: Int) = Modifier.graphicsLayer {
+                    translationY = rowOffsets.getOrNull(index)?.value ?: 0f
+                    alpha = if (alphaIn.value > 0.5f) 1f else alphaIn.value * 2f
                 }
 
                 VisualCard(
@@ -268,7 +279,7 @@ private fun DashboardContent(
                             }
                         runCatching { context.startActivity(intent) }
                     },
-                    modifier = Modifier.fillMaxWidth().height(148.dp).then(revealModifier),
+                    modifier = Modifier.fillMaxWidth().height(148.dp).then(rowAnim(0)),
                 ) {
                     ThemesIllustration()
                 }
@@ -276,7 +287,7 @@ private fun DashboardContent(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(revealModifier),
+                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(1)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
@@ -305,7 +316,7 @@ private fun DashboardContent(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(revealModifier),
+                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(2)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
@@ -334,7 +345,7 @@ private fun DashboardContent(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(revealModifier),
+                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(3)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
@@ -615,28 +626,49 @@ private fun WallpaperCard(
 @Composable
 private fun ThemesIllustration() {
     val colors = MaterialTheme.colorScheme
+    val infiniteTransition = rememberInfiniteTransition(label = "themeGlow")
+    val glowAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.6f, targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(2000, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "glowAlpha",
+    )
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Box(
             modifier = Modifier
-                .size(56.dp)
-                .offset(x = (-14).dp)
+                .size(64.dp)
                 .clip(CircleShape)
-                .background(colors.primary.copy(alpha = 0.7f)),
+                .background(colors.primary.copy(alpha = glowAlpha * 0.3f)),
         )
         Box(
             modifier = Modifier
-                .size(56.dp)
-                .offset(x = 14.dp)
+                .size(48.dp)
+                .offset(x = (-16).dp, y = (-8).dp)
                 .clip(CircleShape)
-                .background(colors.tertiary.copy(alpha = 0.7f)),
-        )
+                .background(colors.primary.copy(alpha = 0.85f)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(Icons.Filled.Palette, contentDescription = null, tint = Color.White, modifier = Modifier.size(24.dp))
+        }
         Box(
             modifier = Modifier
-                .size(56.dp)
-                .offset(y = 14.dp)
+                .size(40.dp)
+                .offset(x = 16.dp, y = 4.dp)
                 .clip(CircleShape)
-                .background(colors.secondary.copy(alpha = 0.7f)),
-        )
+                .background(colors.tertiary.copy(alpha = 0.8f)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(Icons.Filled.Star, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
+        }
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .offset(y = 20.dp)
+                .clip(CircleShape)
+                .background(colors.secondary.copy(alpha = 0.75f)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(Icons.Filled.Brush, contentDescription = null, tint = Color.White, modifier = Modifier.size(18.dp))
+        }
     }
 }
 

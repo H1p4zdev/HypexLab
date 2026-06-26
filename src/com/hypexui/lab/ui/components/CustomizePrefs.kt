@@ -809,6 +809,7 @@ fun DashboardCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     accentColor: Color = MaterialTheme.colorScheme.primary,
+    summary: String? = null,
 ) {
     val colors = MaterialTheme.colorScheme
     val interactionSource = remember { MutableInteractionSource() }
@@ -816,25 +817,24 @@ fun DashboardCard(
     val scale by
         animateFloatAsState(
             targetValue = if (isPressed) 0.96f else 1f,
-            animationSpec = spring(dampingRatio = 0.7f, stiffness = 400f),
+            animationSpec = spring(dampingRatio = 0.6f, stiffness = 450f),
             label = "scale",
         )
 
-    Box(
+    Surface(
         modifier =
             modifier
                 .fillMaxHeight()
                 .graphicsLayer {
                     scaleX = scale
                     scaleY = scale
-                }
-                .clip(RoundedCornerShape(28.dp))
-                .background(colors.surface)
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = ripple(bounded = true),
-                    onClick = onClick,
-                ),
+                    shadowElevation = if (isPressed) 2f else 6f
+                },
+        shape = RoundedCornerShape(28.dp),
+        color = colors.surface,
+        tonalElevation = if (isPressed) 2.dp else 6.dp,
+        shadowElevation = if (isPressed) 2.dp else 6.dp,
+        onClick = onClick,
     ) {
         Column(
             modifier = Modifier.fillMaxSize().padding(12.dp),
@@ -849,7 +849,7 @@ fun DashboardCard(
                     imageVector = icon,
                     contentDescription = null,
                     tint = accentColor,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(26.dp),
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
@@ -857,10 +857,20 @@ fun DashboardCard(
                 text = title,
                 style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
                 color = colors.onSurface,
-                maxLines = 2,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,
             )
+            if (summary != null) {
+                Text(
+                    text = summary,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = colors.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center,
+                )
+            }
         }
         Box(
             modifier = Modifier
@@ -868,7 +878,7 @@ fun DashboardCard(
                 .height(3.dp)
                 .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
                 .background(
-                    Brush.horizontalGradient(listOf(accentColor, accentColor.copy(alpha = 0.4f)))
+                    Brush.horizontalGradient(listOf(accentColor, accentColor.copy(alpha = 0.3f)))
                 )
                 .align(Alignment.TopCenter),
         )

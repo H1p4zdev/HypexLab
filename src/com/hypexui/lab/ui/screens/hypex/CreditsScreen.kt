@@ -19,7 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Telegram
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -118,7 +118,7 @@ fun CreditsScreen(
                     creditRow(
                         title = "HypexUI Channel",
                         subtitle = "Join for updates",
-                        icon = Icons.Default.Telegram,
+                        icon = Icons.Default.Send,
                         onClick = {
                             try {
                                 context.startActivity(

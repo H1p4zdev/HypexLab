@@ -15,7 +15,7 @@ import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Brightness6
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.Clock
+import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
@@ -78,7 +78,7 @@ fun UICustomizeScreen(
                         settingKey = "statusbar_clock_seconds",
                         title = "Show Clock Seconds",
                         summary = "Show seconds in the status bar clock",
-                        icon = Icons.Default.Clock,
+                        icon = Icons.Default.Schedule,
                     )
                 }
                 item {

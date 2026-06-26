@@ -1,25 +1,39 @@
 package com.hypexui.lab.ui.screens.hypex
 
 import android.content.Intent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.OpenInNew
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Telegram
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.hypexui.compose.preferences.ClickablePreference
 import com.hypexui.compose.preferences.PreferenceGroup
 import com.hypexui.compose.scaffold.HypexScaffold
@@ -42,52 +56,52 @@ fun CreditsScreen(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            HypexHeader(subtitle = "Credits and Update Info")
+            HypexHeader(subtitle = "About HypexUI Lab")
 
             Column(
                 modifier = Modifier.widthIn(max = MaxContentWidth).padding(horizontal = 24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
-                Text(
-                    text = "HypexUI",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = "Version 1.4",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(24.dp))
+                        .padding(24.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "HypexUI Lab",
+                            style = MaterialTheme.typography.headlineMedium,
+                            color = MaterialTheme.colorScheme.primary,
+                            textAlign = TextAlign.Center,
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "v1.4",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        deviceInfoRow("Device", android.os.Build.DEVICE)
+                        deviceInfoRow("Android", android.os.Build.VERSION.RELEASE)
+                        deviceInfoRow("Build", android.os.Build.VERSION.INCREMENTAL)
+                        deviceInfoRow("Chipset", android.os.Build.HARDWARE)
+                    }
+                }
 
                 Spacer(modifier = Modifier.height(20.dp))
-
-                infoRow("Device", android.os.Build.DEVICE)
-                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                infoRow("Android", android.os.Build.VERSION.RELEASE)
-                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                infoRow("Build", android.os.Build.VERSION.INCREMENTAL)
-                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                infoRow("Chipset", android.os.Build.HARDWARE)
-                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                Text(
-                    text = "Credits",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
             }
 
             PreferenceGroup {
                 item {
-                    ClickablePreference(
-                        title = "Exx Hypex 👾",
-                        summary = "Maintainer",
-                        showExternalIcon = true,
+                    creditRow(
+                        title = "Exx Hypex",
+                        subtitle = "Creator & Maintainer",
+                        icon = Icons.Default.Person,
                         onClick = {
                             try {
                                 context.startActivity(
@@ -101,32 +115,32 @@ fun CreditsScreen(
                     )
                 }
                 item {
-                    ClickablePreference(
-                        title = "Exx Hypex 👾",
-                        summary = "Owner Of Project",
-                        showExternalIcon = true,
-                        onClick = {
-                            try {
-                                context.startActivity(
-                                    Intent(Intent.ACTION_VIEW).apply {
-                                        data = android.net.Uri.parse("https://t.me/himel_pvz")
-                                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                                    }
-                                )
-                            } catch (_: Exception) { }
-                        },
-                    )
-                }
-                item {
-                    ClickablePreference(
-                        title = "HypexUI",
-                        summary = "Join For Update",
-                        showExternalIcon = true,
+                    creditRow(
+                        title = "HypexUI Channel",
+                        subtitle = "Join for updates",
+                        icon = Icons.Default.Telegram,
                         onClick = {
                             try {
                                 context.startActivity(
                                     Intent(Intent.ACTION_VIEW).apply {
                                         data = android.net.Uri.parse("https://t.me/hypexui")
+                                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                    }
+                                )
+                            } catch (_: Exception) { }
+                        },
+                    )
+                }
+                item {
+                    creditRow(
+                        title = "Support Development",
+                        subtitle = "Your support keeps this project alive",
+                        icon = Icons.Default.Favorite,
+                        onClick = {
+                            try {
+                                context.startActivity(
+                                    Intent(Intent.ACTION_VIEW).apply {
+                                        data = android.net.Uri.parse("https://t.me/himel_pvz")
                                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                                     }
                                 )
@@ -142,19 +156,37 @@ fun CreditsScreen(
 }
 
 @Composable
-private fun infoRow(label: String, value: String) {
-    Column(
-        modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
+private fun deviceInfoRow(label: String, value: String) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
             text = label,
-            style = MaterialTheme.typography.titleSmall,
-            fontWeight = FontWeight.Medium,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Text(
             text = value,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            fontWeight = FontWeight.Medium,
+            color = MaterialTheme.colorScheme.onSurface,
         )
     }
+}
+
+@Composable
+private fun creditRow(
+    title: String,
+    subtitle: String,
+    icon: ImageVector,
+    onClick: () -> Unit,
+) {
+    ClickablePreference(
+        title = title,
+        summary = subtitle,
+        icon = icon,
+        showExternalIcon = true,
+        onClick = onClick,
+    )
 }

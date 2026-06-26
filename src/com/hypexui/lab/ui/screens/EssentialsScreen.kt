@@ -39,7 +39,11 @@ import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.Gamepad
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.ScreenshotMonitor
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.SportsEsports
+import androidx.compose.material.icons.filled.Store
+import androidx.compose.material.icons.filled.Videocam
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -197,6 +201,59 @@ private fun EssentialsContent(
                     title = stringResource(R.string.no_storage_restrict_title),
                     summary = stringResource(R.string.no_storage_restrict_summary),
                     icon = Icons.Default.Folder,
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        PreferenceGroup(title = "Device Spoofing") {
+            item {
+                SecureSettingSwitch(
+                    settingKey = "persist.sys.nexiun.playstore",
+                    title = "Play Store Spoof",
+                    summary = "Spoof device as Pixel 9 Pro XL for Play Store",
+                    icon = Icons.Default.Store,
+                )
+            }
+            item {
+                SecureSettingSwitch(
+                    settingKey = "persist.sys.nexiun.messenger",
+                    title = "Messenger Spoof",
+                    summary = "Spoof device as Samsung Galaxy S24 Ultra for Messenger",
+                    icon = Icons.Default.Phone,
+                )
+            }
+            item {
+                SecureSettingSwitch(
+                    settingKey = "persist.sys.nexiun.games",
+                    title = "Unlock Higher FPS",
+                    summary = "Spoof device model for higher FPS in games",
+                    icon = Icons.Default.SportsEsports,
+                )
+            }
+            item {
+                SecureSettingSwitch(
+                    settingKey = "persist.sys.nexiun.photos",
+                    title = "Unlimited Photos Storage",
+                    summary = "Spoof as Pixel for Google Photos unlimited storage",
+                    icon = Icons.Default.PhotoLibrary,
+                )
+            }
+            item {
+                SecureSettingSwitch(
+                    settingKey = "persist.sys.nexiun.netflix",
+                    title = "Netflix Spoof",
+                    summary = "Spoof device for Netflix compatibility",
+                    icon = Icons.Default.Videocam,
+                )
+            }
+            item {
+                SecureSettingSwitch(
+                    settingKey = "persist.sys.nexiun.snapchat",
+                    title = "Snapchat Spoof",
+                    summary = "Spoof as Pixel for Snapchat features",
+                    icon = Icons.Default.Fingerprint,
                 )
             }
         }

@@ -808,14 +808,15 @@ fun DashboardCard(
     icon: ImageVector,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    accentColor: Color = MaterialTheme.colorScheme.primary,
 ) {
     val colors = MaterialTheme.colorScheme
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val scale by
         animateFloatAsState(
-            targetValue = if (isPressed) 0.97f else 1f,
-            animationSpec = spring(dampingRatio = 0.8f, stiffness = 400f),
+            targetValue = if (isPressed) 0.96f else 1f,
+            animationSpec = spring(dampingRatio = 0.7f, stiffness = 400f),
             label = "scale",
         )
 
@@ -828,30 +829,48 @@ fun DashboardCard(
                     scaleY = scale
                 }
                 .clip(RoundedCornerShape(28.dp))
-                .background(colors.surfaceBright)
+                .background(colors.surface)
                 .clickable(
                     interactionSource = interactionSource,
-                    indication = ripple(),
+                    indication = ripple(bounded = true),
                     onClick = onClick,
                 ),
-        contentAlignment = Alignment.Center,
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = colors.onSurface,
-                modifier = Modifier.size(32.dp),
-            )
-            Spacer(modifier = Modifier.height(10.dp))
+        Column(
+            modifier = Modifier.fillMaxSize().padding(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Box(
+                modifier = Modifier.size(44.dp).clip(CircleShape).background(accentColor.copy(alpha = 0.12f)),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = accentColor,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleMedium.copy(fontSize = 12.sp),
+                style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
                 color = colors.onSurface,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,
             )
         }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(3.dp)
+                .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
+                .background(
+                    Brush.horizontalGradient(listOf(accentColor, accentColor.copy(alpha = 0.4f)))
+                )
+                .align(Alignment.TopCenter),
+        )
     }
 }

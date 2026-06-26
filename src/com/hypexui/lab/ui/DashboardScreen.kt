@@ -282,18 +282,21 @@ private fun DashboardContent(
                     DashboardCard(
                         title = stringResource(R.string.routines),
                         icon = Icons.Filled.AutoMode,
+                        accentColor = Color(0xFF7C4DFF),
                         onClick = { onNavigateToDetail("routines") },
                         modifier = Modifier.weight(1f),
                     )
                     DashboardCard(
                         title = stringResource(R.string.essentials),
                         icon = Icons.Filled.Workspaces,
+                        accentColor = Color(0xFF1678FF),
                         onClick = { onNavigateToDetail("essentials") },
                         modifier = Modifier.weight(1f),
                     )
                     DashboardCard(
                         title = stringResource(R.string.performance),
                         icon = Icons.Filled.Bolt,
+                        accentColor = Color(0xFFFF3D00),
                         onClick = { onNavigateToDetail("performance") },
                         modifier = Modifier.weight(1f),
                     )
@@ -308,44 +311,21 @@ private fun DashboardContent(
                     DashboardCard(
                         title = stringResource(R.string.multitasking),
                         icon = Icons.Filled.Splitscreen,
+                        accentColor = Color(0xFF9C27B0),
                         onClick = { onNavigateToDetail("multitasking") },
                         modifier = Modifier.weight(1f),
                     )
                     DashboardCard(
-                        title = "Spoofs",
-                        icon = Icons.Filled.Fingerprint,
-                        onClick = { onNavigateToDetail("hypex_spoofs") },
-                        modifier = Modifier.weight(1f),
-                    )
-                    DashboardCard(
-                        title = "Status Bar",
-                        icon = Icons.Filled.Star,
-                        onClick = { onNavigateToDetail("hypex_statusbar") },
-                        modifier = Modifier.weight(1f),
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(revealModifier),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    DashboardCard(
-                        title = "Control Centre",
-                        icon = Icons.Filled.Settings,
-                        onClick = { onNavigateToDetail("hypex_cc") },
-                        modifier = Modifier.weight(1f),
-                    )
-                    DashboardCard(
-                        title = "Icons & Style",
+                        title = "Customize",
                         icon = Icons.Filled.Palette,
-                        onClick = { onNavigateToDetail("hypex_icons") },
+                        accentColor = Color(0xFF00BCD4),
+                        onClick = { onNavigateToDetail("customize") },
                         modifier = Modifier.weight(1f),
                     )
                     DashboardCard(
                         title = "Extra Mods",
                         icon = Icons.Filled.Extension,
+                        accentColor = Color(0xFFFF9800),
                         onClick = { onNavigateToDetail("hypex_extra") },
                         modifier = Modifier.weight(1f),
                     )
@@ -360,12 +340,14 @@ private fun DashboardContent(
                     DashboardCard(
                         title = "Shortcuts",
                         icon = Icons.Filled.Link,
+                        accentColor = Color(0xFF4CAF50),
                         onClick = { onNavigateToDetail("hypex_hidden") },
                         modifier = Modifier.weight(1f),
                     )
                     DashboardCard(
                         title = "Credits",
                         icon = Icons.Filled.Info,
+                        accentColor = Color(0xFF607D8B),
                         onClick = { onNavigateToDetail("hypex_credit") },
                         modifier = Modifier.weight(1f),
                     )
@@ -397,9 +379,9 @@ private fun DetailScreen(
 ) {
     when (screen) {
         "lockscreen" -> ComingSoonScreen(onBackClick = onBackClick)
-        "ui_features" -> ComingSoonScreen(onBackClick = onBackClick)
         "sound" -> ComingSoonScreen(onBackClick = onBackClick)
         "gestures" -> ComingSoonScreen(onBackClick = onBackClick)
+        "customize" -> UICustomizeScreen(onBackClick = onBackClick)
         "trickystore" -> TrickyStoreScreen(onBackClick = onBackClick)
         "playintegrityfix" -> PlayIntegrityFixScreen(onBackClick = onBackClick)
         "gamespoofing" -> GameSpoofingScreen(onBackClick = onBackClick)
@@ -432,10 +414,6 @@ private fun DetailScreen(
                 onNavigateToAppPicker = onNavigateToAppPicker,
             )
         "multitasking" -> MultitaskingScreen(onBackClick = onBackClick)
-        "hypex_spoofs" -> SpoofsToolboxScreen(onBackClick = onBackClick)
-        "hypex_statusbar" -> StatusBarScreen(onBackClick = onBackClick)
-        "hypex_cc" -> ControlCentreScreen(onBackClick = onBackClick)
-        "hypex_icons" -> IconsStyleScreen(onBackClick = onBackClick)
         "hypex_extra" -> ExtraModsScreen(onBackClick = onBackClick)
         "hypex_hidden" -> SystemShortcutsScreen(onBackClick = onBackClick)
         "hypex_credit" -> CreditsScreen(onBackClick = onBackClick)
@@ -460,9 +438,9 @@ private fun DetailPaneContent(
 ) {
     when (screen) {
         "lockscreen" -> ComingSoonScreen(onBackClick = onClose)
-        "ui_features" -> ComingSoonScreen(onBackClick = onClose)
         "sound" -> ComingSoonScreen(onBackClick = onClose)
         "gestures" -> ComingSoonScreen(onBackClick = onClose)
+        "customize" -> UICustomizeScreen(onBackClick = onClose)
         "trickystore" -> TrickyStoreScreen(onBackClick = onClose)
         "playintegrityfix" -> PlayIntegrityFixScreen(onBackClick = onClose)
         "gamespoofing" -> GameSpoofingScreen(onBackClick = onClose)
@@ -495,10 +473,6 @@ private fun DetailPaneContent(
                 onNavigateToAppPicker = onNavigateToAppPicker,
             )
         "multitasking" -> MultitaskingScreen(onBackClick = onClose)
-        "hypex_spoofs" -> SpoofsToolboxScreen(onBackClick = onClose)
-        "hypex_statusbar" -> StatusBarScreen(onBackClick = onClose)
-        "hypex_cc" -> ControlCentreScreen(onBackClick = onClose)
-        "hypex_icons" -> IconsStyleScreen(onBackClick = onClose)
         "hypex_extra" -> ExtraModsScreen(onBackClick = onClose)
         "hypex_hidden" -> SystemShortcutsScreen(onBackClick = onClose)
         "hypex_credit" -> CreditsScreen(onBackClick = onClose)

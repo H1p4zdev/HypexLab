@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -30,6 +31,7 @@ fun SecureSettingSwitch(
     title: String,
     summary: String? = null,
     icon: ImageVector? = null,
+    iconTint: Color? = null,
     defaultValue: Boolean = false,
     enabled: Boolean = true,
     modifier: Modifier = Modifier,
@@ -70,7 +72,7 @@ fun SecureSettingSwitch(
                 androidx.compose.material3.Icon(
                     imageVector = icon,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    tint = iconTint ?: MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.size(24.dp),
                 )
                 Spacer(modifier = Modifier.width(16.dp))

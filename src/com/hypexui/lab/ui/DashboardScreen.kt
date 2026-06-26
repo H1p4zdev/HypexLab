@@ -246,7 +246,7 @@ private fun DashboardContent(
             ) {
                 val scaleIn = remember { Animatable(0.9f) }
                 val alphaIn = remember { Animatable(0f) }
-                val rowOffsets = remember { List(6) { Animatable(24f) } }
+                val rowOffsets = remember { List(8) { Animatable(24f) } }
                 LaunchedEffect(Unit) {
                     launch { scaleIn.animateTo(1f, tween(400, easing = FastOutSlowInEasing)) }
                     launch { alphaIn.animateTo(1f, tween(300, easing = FastOutSlowInEasing)) }
@@ -292,71 +292,83 @@ private fun DashboardContent(
                             }
                         runCatching { context.startActivity(intent) }
                     },
-                    modifier = Modifier.fillMaxWidth().height(148.dp).then(rowAnim(2)),
+                    modifier = Modifier.fillMaxWidth().height(140.dp).then(rowAnim(2)),
                 ) {
                     ThemesIllustration()
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
 
+                DashboardCard(
+                    title = stringResource(R.string.essentials),
+                    summary = "Apps, notifications, gaming and spoofing",
+                    icon = Icons.Filled.Workspaces,
+                    accentColor = Color(0xFF1678FF),
+                    onClick = { onNavigateToDetail("essentials") },
+                    modifier = Modifier.fillMaxWidth().height(172.dp).then(rowAnim(3)),
+                    shapeIndex = 0,
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(3)),
+                    modifier = Modifier.fillMaxWidth().then(rowAnim(4)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
                         title = stringResource(R.string.routines),
+                        summary = "Automate tasks",
                         icon = Icons.Filled.AutoMode,
                         accentColor = Color(0xFF7C4DFF),
                         onClick = { onNavigateToDetail("routines") },
-                        modifier = Modifier.weight(1f),
-                        shapeIndex = 0,
-                    )
-                    DashboardCard(
-                        title = stringResource(R.string.essentials),
-                        icon = Icons.Filled.Workspaces,
-                        accentColor = Color(0xFF1678FF),
-                        onClick = { onNavigateToDetail("essentials") },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(1f),
                         shapeIndex = 1,
                     )
                     DashboardCard(
                         title = stringResource(R.string.performance),
+                        summary = "CPU and battery",
                         icon = Icons.Filled.Bolt,
                         accentColor = Color(0xFFFF3D00),
                         onClick = { onNavigateToDetail("performance") },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(1f),
                         shapeIndex = 2,
                     )
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
 
+                DashboardCard(
+                    title = "Customize",
+                    summary = "Status bar, control centre, icons and style",
+                    icon = Icons.Filled.Palette,
+                    accentColor = Color(0xFF00BCD4),
+                    onClick = { onNavigateToDetail("customize") },
+                    modifier = Modifier.fillMaxWidth().height(172.dp).then(rowAnim(5)),
+                    shapeIndex = 3,
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(3)),
+                    modifier = Modifier.fillMaxWidth().then(rowAnim(6)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
                         title = stringResource(R.string.multitasking),
+                        summary = "Sidebar and PC mode",
                         icon = Icons.Filled.Splitscreen,
                         accentColor = Color(0xFF9C27B0),
                         onClick = { onNavigateToDetail("multitasking") },
-                        modifier = Modifier.weight(1f),
-                        shapeIndex = 3,
-                    )
-                    DashboardCard(
-                        title = "Customize",
-                        icon = Icons.Filled.Palette,
-                        accentColor = Color(0xFF00BCD4),
-                        onClick = { onNavigateToDetail("customize") },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(1f),
                         shapeIndex = 4,
                     )
                     DashboardCard(
                         title = "Extra Mods",
+                        summary = "Useful tweaks",
                         icon = Icons.Filled.Extension,
                         accentColor = Color(0xFFFF9800),
                         onClick = { onNavigateToDetail("hypex_extra") },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(1f),
                         shapeIndex = 5,
                     )
                 }
@@ -364,26 +376,27 @@ private fun DashboardContent(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(5)),
+                    modifier = Modifier.fillMaxWidth().then(rowAnim(7)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
                         title = "Shortcuts",
+                        summary = "Quick system settings",
                         icon = Icons.Filled.Link,
                         accentColor = Color(0xFF4CAF50),
                         onClick = { onNavigateToDetail("hypex_hidden") },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(1f),
                         shapeIndex = 6,
                     )
                     DashboardCard(
                         title = "Credits",
+                        summary = "About and support",
                         icon = Icons.Filled.Info,
                         accentColor = Color(0xFF607D8B),
                         onClick = { onNavigateToDetail("hypex_credit") },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).aspectRatio(1f),
                         shapeIndex = 7,
                     )
-                    Spacer(modifier = Modifier.weight(1f))
                 }
 
                 Spacer(modifier = Modifier.height(32.dp))

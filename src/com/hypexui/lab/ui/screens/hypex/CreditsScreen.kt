@@ -1,6 +1,7 @@
 package com.hypexui.lab.ui.screens.hypex
 
 import android.content.Intent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -34,8 +35,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -61,11 +64,7 @@ fun CreditsScreen(
                 .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            HypexHeader(subtitle = "About HypexUI Lab")
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            AppInfoCard()
+            HeroLogoCard()
 
             Spacer(modifier = Modifier.height(12.dp))
 
@@ -136,7 +135,7 @@ fun CreditsScreen(
 }
 
 @Composable
-private fun AppInfoCard() {
+private fun HeroLogoCard() {
     val colors = MaterialTheme.colorScheme
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -148,32 +147,30 @@ private fun AppInfoCard() {
             modifier = Modifier.fillMaxWidth().padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Box(
-                modifier = Modifier
-                    .size(64.dp)
-                    .clip(CircleShape)
-                    .background(colors.primary.copy(alpha = 0.1f)),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(
-                    text = "HL",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = colors.primary,
-                )
-            }
+            Image(
+                painter = painterResource(R.drawable.provision_os_logo),
+                contentDescription = null,
+                modifier = Modifier.size(56.dp),
+                colorFilter = ColorFilter.tint(colors.primary),
+            )
             Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = "HypexUI Lab",
-                style = MaterialTheme.typography.headlineSmall,
+                text = "HypexUI",
+                style = MaterialTheme.typography.displaySmall,
                 fontWeight = FontWeight.Bold,
                 color = colors.onSurface,
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "v1.4",
-                style = MaterialTheme.typography.titleMedium,
-                color = colors.primary,
+                text = android.os.Build.VERSION.INCREMENTAL,
+                fontSize = 10.sp,
+                color = Color.White,
+                modifier = Modifier
+                    .background(
+                        Color(0x711F1F1F),
+                        RoundedCornerShape(6.dp),
+                    )
+                    .padding(horizontal = 8.dp, vertical = 2.dp),
             )
         }
     }

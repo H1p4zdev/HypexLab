@@ -229,8 +229,17 @@ private fun DashboardContent(
     val context = LocalContext.current
     val activity = context as? Activity
 
+    val calendar = remember { Calendar.getInstance() }
+    val hour = calendar.get(Calendar.HOUR_OF_DAY)
+    val greeting = when {
+        hour < 12 -> "Good Morning"
+        hour < 17 -> "Good Afternoon"
+        else -> "Good Evening"
+    }
+
     HypexScaffold(
         title = stringResource(R.string.personalizations),
+        subtitle = greeting,
         onBackClick = { activity?.finish() },
     ) { innerPadding ->
         Box(
@@ -246,7 +255,7 @@ private fun DashboardContent(
             ) {
                 val scaleIn = remember { Animatable(0.9f) }
                 val alphaIn = remember { Animatable(0f) }
-                val rowOffsets = remember { List(8) { Animatable(24f) } }
+                val rowOffsets = remember { List(7) { Animatable(24f) } }
                 LaunchedEffect(Unit) {
                     launch { scaleIn.animateTo(1f, tween(400, easing = FastOutSlowInEasing)) }
                     launch { alphaIn.animateTo(1f, tween(300, easing = FastOutSlowInEasing)) }
@@ -256,11 +265,6 @@ private fun DashboardContent(
                             anim.animateTo(0f, spring(dampingRatio = 0.7f, stiffness = 300f))
                         }
                     }
-                }
-                val revealModifier = Modifier.graphicsLayer {
-                    scaleX = scaleIn.value
-                    scaleY = scaleIn.value
-                    alpha = alphaIn.value
                 }
                 fun rowAnim(index: Int) = Modifier.graphicsLayer {
                     translationY = rowOffsets.getOrNull(index)?.value ?: 0f
@@ -272,11 +276,7 @@ private fun DashboardContent(
                     modifier = Modifier.then(rowAnim(0)),
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
-
-                GreetingCard(modifier = Modifier.fillMaxWidth().then(rowAnim(1)))
-
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 VisualCard(
                     title = stringResource(R.string.themes),
@@ -292,12 +292,12 @@ private fun DashboardContent(
                             }
                         runCatching { context.startActivity(intent) }
                     },
-                    modifier = Modifier.fillMaxWidth().height(140.dp).then(rowAnim(2)),
+                    modifier = Modifier.fillMaxWidth().height(100.dp).then(rowAnim(1)),
                 ) {
                     ThemesIllustration()
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 DashboardCard(
                     title = stringResource(R.string.essentials),
@@ -305,14 +305,14 @@ private fun DashboardContent(
                     icon = Icons.Filled.Workspaces,
                     accentColor = Color(0xFF1678FF),
                     onClick = { onNavigateToDetail("essentials") },
-                    modifier = Modifier.fillMaxWidth().height(120.dp).then(rowAnim(3)),
+                    modifier = Modifier.fillMaxWidth().height(120.dp).then(rowAnim(2)),
                     shapeIndex = 0,
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().then(rowAnim(4)),
+                    modifier = Modifier.fillMaxWidth().then(rowAnim(3)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
@@ -335,7 +335,7 @@ private fun DashboardContent(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 DashboardCard(
                     title = "Customize",
@@ -343,14 +343,14 @@ private fun DashboardContent(
                     icon = Icons.Filled.Palette,
                     accentColor = Color(0xFF00BCD4),
                     onClick = { onNavigateToDetail("customize") },
-                    modifier = Modifier.fillMaxWidth().height(120.dp).then(rowAnim(5)),
+                    modifier = Modifier.fillMaxWidth().height(120.dp).then(rowAnim(4)),
                     shapeIndex = 3,
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().then(rowAnim(6)),
+                    modifier = Modifier.fillMaxWidth().then(rowAnim(5)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
@@ -373,10 +373,10 @@ private fun DashboardContent(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().then(rowAnim(7)),
+                    modifier = Modifier.fillMaxWidth().then(rowAnim(6)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
@@ -399,7 +399,7 @@ private fun DashboardContent(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 HypexFooter()
 
@@ -821,65 +821,6 @@ fun ComingSoonScreen(onBackClick: () -> Unit) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(horizontal = 32.dp),
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun GreetingCard(modifier: Modifier = Modifier) {
-    val colors = MaterialTheme.colorScheme
-    val calendar = remember { Calendar.getInstance() }
-    val hour = calendar.get(Calendar.HOUR_OF_DAY)
-    val greeting = when {
-        hour < 12 -> "Good Morning"
-        hour < 17 -> "Good Afternoon"
-        else -> "Good Evening"
-    }
-    val icon = when {
-        hour < 12 -> Icons.Filled.WbSunny
-        hour < 17 -> Icons.Filled.LightMode
-        else -> Icons.Filled.DarkMode
-    }
-
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(16.dp),
-        color = colors.primaryContainer,
-        tonalElevation = 0.dp,
-        shadowElevation = 0.dp,
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 18.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = greeting,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = colors.onPrimaryContainer,
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = "Welcome to HypexLab",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = colors.onPrimaryContainer.copy(alpha = 0.7f),
-                )
-            }
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .clip(CircleShape)
-                    .background(colors.primary),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    tint = colors.onPrimary,
-                    modifier = Modifier.size(28.dp),
                 )
             }
         }

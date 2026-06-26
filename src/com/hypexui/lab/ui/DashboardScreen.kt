@@ -60,6 +60,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.hypexui.lab.ui.screens.*
+import com.hypexui.lab.ui.screens.hypex.*
 import com.hypexui.lab.ui.screens.routines.RoutinesScreen
 import com.hypexui.lab.ui.theme.MaxContentWidth
 import com.hypexui.compose.preferences.*
@@ -310,9 +311,16 @@ private fun DashboardContent(
                         onClick = { onNavigateToDetail("multitasking") },
                         modifier = Modifier.weight(1f),
                     )
-                    Spacer(modifier = Modifier.weight(1f))
+                    DashboardCard(
+                        title = stringResource(R.string.hypex_mods),
+                        icon = Icons.Filled.Extension,
+                        onClick = { onNavigateToDetail("hypex_mods") },
+                        modifier = Modifier.weight(1f),
+                    )
                     Spacer(modifier = Modifier.weight(1f))
                 }
+
+                Spacer(modifier = Modifier.height(12.dp))
 
                 Spacer(modifier = Modifier.height(32.dp))
 
@@ -374,6 +382,19 @@ private fun DetailScreen(
                 onNavigateToAppPicker = onNavigateToAppPicker,
             )
         "multitasking" -> MultitaskingScreen(onBackClick = onBackClick)
+        "hypex_mods" ->
+            HypexModsScreen(
+                onBackClick = onBackClick,
+                onNavigateTo = onNavigateToDetail,
+            )
+        "hypex_spoofs" -> SpoofsToolboxScreen(onBackClick = onBackClick)
+        "hypex_statusbar" -> StatusBarScreen(onBackClick = onBackClick)
+        "hypex_cc" -> ControlCentreScreen(onBackClick = onBackClick)
+        "hypex_icons" -> IconsStyleScreen(onBackClick = onBackClick)
+        "hypex_settings" -> SettingsModsScreen(onBackClick = onBackClick)
+        "hypex_extra" -> ExtraModsScreen(onBackClick = onBackClick)
+        "hypex_hidden" -> SystemShortcutsScreen(onBackClick = onBackClick)
+        "hypex_credit" -> CreditsScreen(onBackClick = onBackClick)
     }
 }
 
@@ -430,6 +451,19 @@ private fun DetailPaneContent(
                 onNavigateToAppPicker = onNavigateToAppPicker,
             )
         "multitasking" -> MultitaskingScreen(onBackClick = onClose)
+        "hypex_mods" ->
+            HypexModsScreen(
+                onBackClick = onClose,
+                onNavigateTo = onNavigateToDetail,
+            )
+        "hypex_spoofs" -> SpoofsToolboxScreen(onBackClick = onClose)
+        "hypex_statusbar" -> StatusBarScreen(onBackClick = onClose)
+        "hypex_cc" -> ControlCentreScreen(onBackClick = onClose)
+        "hypex_icons" -> IconsStyleScreen(onBackClick = onClose)
+        "hypex_settings" -> SettingsModsScreen(onBackClick = onClose)
+        "hypex_extra" -> ExtraModsScreen(onBackClick = onClose)
+        "hypex_hidden" -> SystemShortcutsScreen(onBackClick = onClose)
+        "hypex_credit" -> CreditsScreen(onBackClick = onClose)
     }
 }
 

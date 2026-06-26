@@ -186,6 +186,8 @@ fun SystemShortcutsScreen(
                 }
             }
 
+            HypexFooter()
+
             Spacer(modifier = Modifier.height(32.dp))
         }
     }

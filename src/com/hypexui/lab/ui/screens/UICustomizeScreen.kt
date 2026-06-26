@@ -39,6 +39,8 @@ import com.hypexui.compose.preferences.ClickablePreference
 import com.hypexui.compose.preferences.PreferenceGroup
 import com.hypexui.compose.preferences.SecureSettingSwitch
 import com.hypexui.compose.scaffold.HypexScaffold
+import com.hypexui.lab.ui.screens.hypex.HypexFooter
+import com.hypexui.lab.ui.screens.hypex.HypexHeader
 
 @Composable
 fun UICustomizeScreen(
@@ -57,6 +59,10 @@ fun UICustomizeScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 24.dp),
         ) {
+            HypexHeader(subtitle = "Customize Status Bar, Control Centre, and Icons")
+
+            Spacer(modifier = Modifier.height(12.dp))
+
             PreferenceGroup(title = "Status Bar") {
                 item {
                     SecureSettingSwitch(
@@ -238,6 +244,8 @@ fun UICustomizeScreen(
                     )
                 }
             }
+
+            HypexFooter()
 
             Spacer(modifier = Modifier.height(32.dp))
         }

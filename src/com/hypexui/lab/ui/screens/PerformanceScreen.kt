@@ -54,6 +54,8 @@ import com.hypexui.compose.preferences.ClickablePreference
 import com.hypexui.compose.preferences.SettingsType
 import com.hypexui.compose.preferences.rememberSettingsFlow
 import com.hypexui.compose.scaffold.HypexScaffold
+import com.hypexui.lab.ui.screens.hypex.HypexFooter
+import com.hypexui.lab.ui.screens.hypex.HypexHeader
 
 private data class ClusterConfig(
     val name: String,
@@ -160,6 +162,10 @@ fun PerformanceContent(
     ) {
         Spacer(modifier = Modifier.height(8.dp))
 
+        HypexHeader(subtitle = "Performance Tuning and CPU Control")
+
+        Spacer(modifier = Modifier.height(12.dp))
+
         ClickablePreference(
             title = stringResource(R.string.background_manager),
             summary = stringResource(R.string.background_manager_summary),
@@ -186,6 +192,8 @@ fun PerformanceContent(
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
+
+        HypexFooter()
 
         Spacer(modifier = Modifier.height(32.dp))
     }

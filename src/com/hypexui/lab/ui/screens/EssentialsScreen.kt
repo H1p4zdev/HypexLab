@@ -59,6 +59,8 @@ import com.hypexui.compose.preferences.ClickablePreference
 import com.hypexui.compose.preferences.PreferenceGroup
 import com.hypexui.compose.preferences.SecureSettingSwitch
 import com.hypexui.compose.scaffold.HypexScaffold
+import com.hypexui.lab.ui.screens.hypex.HypexFooter
+import com.hypexui.lab.ui.screens.hypex.HypexHeader
 
 @Composable
 fun EssentialsScreen(
@@ -129,6 +131,10 @@ private fun EssentialsContent(
             modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp)
     ) {
         Spacer(modifier = Modifier.height(8.dp))
+
+        HypexHeader(subtitle = "Essential Tools and Spoofing")
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         PreferenceGroup(title = stringResource(R.string.essential_notifications)) {
             item { EssentialAppsPreference(onNavigateToAppPicker = onNavigateToAppPicker) }
@@ -257,6 +263,8 @@ private fun EssentialsContent(
                 )
             }
         }
+
+        HypexFooter()
 
         Spacer(modifier = Modifier.height(32.dp))
     }

@@ -246,7 +246,7 @@ private fun DashboardContent(
             ) {
                 val scaleIn = remember { Animatable(0.9f) }
                 val alphaIn = remember { Animatable(0f) }
-                val rowOffsets = remember { List(5) { Animatable(24f) } }
+                val rowOffsets = remember { List(6) { Animatable(24f) } }
                 LaunchedEffect(Unit) {
                     launch { scaleIn.animateTo(1f, tween(400, easing = FastOutSlowInEasing)) }
                     launch { alphaIn.animateTo(1f, tween(300, easing = FastOutSlowInEasing)) }
@@ -267,7 +267,14 @@ private fun DashboardContent(
                     alpha = if (alphaIn.value > 0.5f) 1f else alphaIn.value * 2f
                 }
 
-                GreetingCard(modifier = Modifier.fillMaxWidth().then(rowAnim(0)))
+                HypexHeader(
+                    subtitle = "Personalize your device",
+                    modifier = Modifier.then(rowAnim(0)),
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                GreetingCard(modifier = Modifier.fillMaxWidth().then(rowAnim(1)))
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -285,7 +292,7 @@ private fun DashboardContent(
                             }
                         runCatching { context.startActivity(intent) }
                     },
-                    modifier = Modifier.fillMaxWidth().height(148.dp).then(rowAnim(1)),
+                    modifier = Modifier.fillMaxWidth().height(148.dp).then(rowAnim(2)),
                 ) {
                     ThemesIllustration()
                 }
@@ -293,7 +300,7 @@ private fun DashboardContent(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(2)),
+                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(3)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
@@ -357,7 +364,7 @@ private fun DashboardContent(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(4)),
+                    modifier = Modifier.fillMaxWidth().height(118.dp).then(rowAnim(5)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     DashboardCard(
@@ -380,6 +387,8 @@ private fun DashboardContent(
                 }
 
                 Spacer(modifier = Modifier.height(32.dp))
+
+                HypexFooter()
 
                 Spacer(modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars))
             }

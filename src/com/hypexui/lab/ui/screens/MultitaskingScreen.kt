@@ -52,6 +52,8 @@ import androidx.compose.ui.unit.dp
 import com.hypexui.lab.R
 import com.hypexui.lab.ui.components.FeatureCard
 import com.hypexui.compose.scaffold.HypexScaffold
+import com.hypexui.lab.ui.screens.hypex.HypexFooter
+import com.hypexui.lab.ui.screens.hypex.HypexHeader
 
 @Composable
 fun MultitaskingScreen(onBackClick: (() -> Unit)? = null) {
@@ -108,6 +110,10 @@ private fun MultitaskingContent(
     ) {
         Spacer(modifier = Modifier.height(8.dp))
 
+        HypexHeader(subtitle = "Multitasking Features and Tools")
+
+        Spacer(modifier = Modifier.height(12.dp))
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -142,6 +148,8 @@ private fun MultitaskingContent(
                 modifier = Modifier.weight(1f),
             )
         }
+
+        HypexFooter()
 
         Spacer(modifier = Modifier.height(32.dp))
     }

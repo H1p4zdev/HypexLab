@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:layout="@layout/lay2" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="Spoofings and Unlock Pixel Props" />
+    <PreferenceCategory
+        android:persistent="false">
+        <XMiuiCheckBoxPreferencePROP
+            android:title="Play integrity Fix (PIF)"
+            android:key="persist.sys.nexiun.integrity"
+            android:summary="This is the spoof method of ZenDroid. Disable to use your own spoof method"
+            android:defaultValue="true" />
+        <XMiuiCheckBoxPreferencePROP
+            android:title="Enable play store spoof"
+            android:key="persist.sys.nexiun.playstore"
+            android:summary="Spoof your device as a Pixel 9 Pro XL for Play Store only"
+            android:defaultValue="true" />
+        <XMiuiCheckBoxPreferencePROP
+            android:title="Messenger spoof"
+            android:key="persist.sys.nexiun.messenger"
+            android:summary="Spoof your device as a Samsung Galaxy S24 Ultra for Messenger only"
+            android:defaultValue="true" />
+        <XMiuiCheckBoxPreferencePROP
+            android:title="Unlock higher FPS in games"
+            android:key="persist.sys.nexiun.games"
+            android:summary="Spoof your device as a different model for specific games to unlock higher FPS"
+            android:defaultValue="false" />
+        <XMiuiCheckBoxPreferencePROP
+            android:title="Unlimited Photos storage"
+            android:key="persist.sys.nexiun.photos"
+            android:summary="Spoof your device as Pixel device for the Google Photos app only to provide unlimited storage for backup"
+            android:defaultValue="false" />
+        <XMiuiCheckBoxPreferencePROP
+            android:title="Netflix spoof"
+            android:key="persist.sys.nexiun.netflix"
+            android:summary="Spoof your device as different model for Netflix"
+            android:defaultValue="false" />
+        <XMiuiCheckBoxPreferencePROP
+            android:title="Snapchat spoof"
+            android:key="persist.sys.nexiun.snapchat"
+            android:summary="Spoof device as a Pixel for features"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@null"
+        android:selectable="false" />
+</PreferenceScreen>

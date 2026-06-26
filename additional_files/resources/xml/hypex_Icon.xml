@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout="@layout/xdashboard"
+        android:layout_width="fill_parent"
+        android:layout_height="150.0dip"
+        android:layout_marginTop="57.0dip"
+        android:layout_marginBottom="3.0dip"
+        android:layout_marginStart="16.0dip"
+        android:layout_marginEnd="16.0dip" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="Icon and Style" />
+    <MyXCheckBoxPreference
+        android:title="Apply settings"
+        android:summary="This will restart the systemui to apply changes"
+        intent="android.intent.action.TIMEZONE_CHANGED" />
+    <PreferenceCategory
+        android:persistent="false">
+        <Preference
+            android:title="Battery Icons"
+            android:summary="Change Your Battery icon Styles"
+            android:fragment="mobx.settings.overlay.icon.battery.BatteryIcons" />
+        <Preference
+            android:title="Mobile Data Icons"
+            android:key="android.theme.customization.signal_icon"
+            android:summary="Change Your Signal icon Style"
+            android:fragment="mobx.settings.overlay.icon.signal.SignalIcons" />
+        <Preference
+            android:title="Fingerprint Animation Type"
+            android:key="android.theme.customization.fod_icon"
+            android:summary="Change Your Style Fingerprint Animation"
+            android:fragment="mobx.settings.overlay.icon.fod.fodIcons" />
+        <Preference
+            android:title="Navigation Button"
+            android:key="android.theme.customization.fonts"
+            android:summary="Change Your Navigationbar icon styles"
+            android:fragment="mobx.settings.overlay.icon.navigation.NavigationIcons" />
+        <Preference
+            android:title="Settings Monet"
+            android:key="android.theme.customization.settings"
+            android:summary="Change Your Settings Monet"
+            android:fragment="mobx.settings.overlay.icon.settings.SettingsIcons" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/hypex_copy"
+        android:selectable="false" />
+</PreferenceScreen>

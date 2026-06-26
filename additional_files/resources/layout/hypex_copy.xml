@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:gravity="center"
+    android:id="@null"
+    android:clipToPadding="false"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="-1.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:listPreferredItemHeight">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="40.0dip"
+            android:layout_height="40.0dip"
+            android:src="@drawable/xiaomi_os_logo"
+            android:tint="?android:textColorPrimary" />
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="-2.0dip"
+            android:layout_height="40.0dip">
+            <TextView
+                android:textSize="10.0sp"
+                android:layout_gravity="center"
+                android:fadingEdge="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Powered By\nHypexUI"
+                android:maxLines="2"
+                android:fontFamily="@font/evolve"
+                android:paddingStart="1.0dip"
+                android:paddingEnd="0.0dip" />
+        </RelativeLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@android:id/widget_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
+</FrameLayout>

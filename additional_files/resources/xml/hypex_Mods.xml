@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    android:title="@string/fold_screen_settings_title"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout="@layout/layout_lab" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="HypexUI Lab present all modification and customization" />
+    <PreferenceCategory
+        android:persistent="false">
+        <Preference
+            android:icon="@drawable/tile_icon_desktop_mode"
+            android:title="Status Bar"
+            android:summary="Status Bar Spoofs and Customizations"
+            android:fragment="com.hypex.settings.hypexStatus" />
+        <Preference
+            android:icon="@drawable/ic_article"
+            android:title="Control Centre"
+            android:summary="Control Center Customizations"
+            android:fragment="com.hypex.settings.hypexCC" />
+        <Preference
+            android:icon="@drawable/ic_auto_wifi"
+            android:title="Icons and Style"
+            android:summary="Change Icons Styles"
+            android:fragment="com.hypex.settings.hypexIcon" />
+        <Preference
+            android:icon="@drawable/ic_face_enroll_introduction_glasses"
+            android:title="Spoofs Toolbox"
+            android:summary="Spoofings and Unlock Pixel Props">
+            <intent
+                android:targetPackage="com.kousei.kaorios"
+                android:targetClass="com.kousei.kaorios.MainActivity" />
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:persistent="false">
+        <Preference
+            android:icon="@drawable/ic_category_vd_theme_24"
+            android:title="Settings Mods"
+            android:summary="Customize Settings UI and Styles"
+            android:fragment="com.hypex.settings.hypexSettings" />
+        <Preference
+            android:icon="@drawable/ic_zen_mode_icon_cookie"
+            android:title="Extra Mods"
+            android:summary="Some Extra Customizations"
+            android:fragment="com.hypex.settings.hypexExtra" />
+        <Preference
+            android:icon="@drawable/ic_apps_filter_settings_24dp"
+            android:title="System Shortcuts"
+            android:summary="System Settings and Shortcuts"
+            android:fragment="com.hypex.settings.hypexhidden" />
+        <Preference
+            android:icon="@drawable/ic_trash_can"
+            android:title="Credits and Update Info"
+            android:summary="Know About HypexUI"
+            android:fragment="com.hypex.settings.hypexcredit" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/hypex_copy"
+        android:selectable="false" />
+</PreferenceScreen>

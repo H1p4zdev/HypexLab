@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.hypexui.compose.preferences.PreferenceGroup
+import com.hypexui.compose.preferences.PreferenceGroupScope
 import com.hypexui.compose.preferences.SecureSettingSwitch
 import com.hypexui.compose.scaffold.HypexScaffold
 
@@ -88,8 +89,7 @@ fun SpoofsToolboxScreen(
     }
 }
 
-@Composable
-private fun spoofSwitch(
+private fun PreferenceGroupScope.spoofSwitch(
     key: String,
     title: String,
     summary: String,

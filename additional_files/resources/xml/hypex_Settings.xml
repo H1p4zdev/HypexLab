@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout="@layout/xdashboard" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="Customize About and Settings UI" />
+    <PreferenceCategory
+        android:persistent="false">
+        <XMiuiSeekBarPreference
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:title="Wallpaper Blur In Hypex Lab"
+            android:key="cos_blur"
+            android:defaultValue="100"
+            max="100"
+            min="0" />
+        <XMiuiListPreference
+            android:entries="@array/rage_header_entries"
+            android:title="Settings Styles"
+            android:key="rage_header_style"
+            android:summary="Change Your Settings Page Style"
+            android:defaultValue="0"
+            android:entryValues="@array/rage_header_values" />
+        <XMiuiSeekBarPreference
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:title="Wallpaper Blur In Hypex Header"
+            android:key="blur_radius_header"
+            android:defaultValue="100"
+            max="100"
+            min="0" />
+        <XMiuiSeekBarPreference
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:title="Wallpaper Blur In Hypex Frame"
+            android:key="blur_radius_about"
+            android:defaultValue="0"
+            max="100"
+            min="0" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Animation">
+        <MyEditTextPreference
+            android:title="Device name in about phone page"
+            android:key="about_name"
+            android:defaultValue="REDMI Turbo 4 Pro Edition" />
+        <XMiuiCheckBoxPreference
+            android:title="Enable Horizontal Specs"
+            android:key="horizontal_specs"
+            android:summary="Enable Horizontal Specs in about"
+            android:defaultValue="false" />
+        <MyXCheckBoxPreference
+            android:title="Enable Google"
+            android:key="google_shits"
+            android:summary="Enable Google Option in Headers"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Blur">
+        <XMiuiCheckBoxPreference
+            android:title="Blur Effect"
+            android:key="mms_gaussian_blur_background"
+            android:defaultValue="false"
+            android:summaryOn="Dark mode only"
+            android:summaryOff="Dark mode only" />
+        <XMiuiSeekBarPreference
+            android:max="100"
+            android:title="Background Blur Intensity"
+            android:key="blur_background"
+            android:dependency="mms_gaussian_blur_background"
+            android:defaultValue="50" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/hypex_copy"
+        android:selectable="false" />
+</PreferenceScreen>

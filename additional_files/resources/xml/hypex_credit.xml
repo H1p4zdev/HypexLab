@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout="@layout/xdashboard" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="Credits and Update info" />
+    <PreferenceCategory
+        android:persistent="false" />
+    <Preference
+        android:layout="@layout/credit_layout" />
+    <PreferenceCategory
+        android:persistent="false"
+        android:title="Credits">
+        <Preference
+            android:title="Exx Hypex 👾"
+            android:summary="Maintainer">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://t.me/himel_pvz" />
+        </Preference>
+        <Preference
+            android:title="Exx Hypex 👾"
+            android:summary="Owner Of Project">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://t.me/himel_pvz" />
+        </Preference>
+        <Preference
+            android:title="HypexUI"
+            android:summary="Join For Update">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://t.me/hypexui" />
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/hypex_copy"
+        android:selectable="false" />
+</PreferenceScreen>

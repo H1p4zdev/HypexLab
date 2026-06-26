@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout="@layout/xdashboard"
+        android:layout_width="fill_parent"
+        android:layout_height="150.0dip"
+        android:layout_marginTop="57.0dip"
+        android:layout_marginBottom="3.0dip"
+        android:layout_marginStart="16.0dip"
+        android:layout_marginEnd="16.0dip" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="Control Center Customization" />
+    <MyXCheckBoxPreference
+        android:title="Apply settings"
+        android:summary="This will restart the systemui to apply changes"
+        intent="android.intent.action.TIMEZONE_CHANGED" />
+    <PreferenceCategory
+        android:persistent="false">
+        <XMiuiSeekBarPreference
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:title="Wallpaper Blur In Control Centre"
+            android:key="rage_cc_blur"
+            android:defaultValue="100"
+            max="100"
+            min="0" />
+        <XMiuiCheckBoxPreference
+            android:title="Extended Power Menu"
+            android:key="extended_power_menu"
+            android:summary="Enable Extended Power Menu"
+            android:defaultValue="true" />
+        <XMiuiCheckBoxPreference
+            android:title="Device Name"
+            android:key="device_name"
+            android:summary="Disable Device Name in Media Player"
+            android:defaultValue="false" />
+        <XMiuiCheckBoxPreference
+            android:title="Super Volume"
+            android:key="super_volume"
+            android:summary="Enable Super Volume and Voice \nRestart Systemui To Apply"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/hypex_copy"
+        android:selectable="false" />
+</PreferenceScreen>

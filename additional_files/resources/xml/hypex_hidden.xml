@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:layout="@layout/xdashboard" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="Enable Some Useful System Settings and Shortcuts " />
+    <PreferenceCategory
+        android:persistent="false">
+        <Preference
+            android:title="Developer Option"
+            android:key="development_settings_enabled"
+            android:summary="Enable Advanced System Options"
+            android:fragment="com.android.settings.development.DevelopmentSettingsDashboardFragment"
+            app:controller="com.android.settings.personal.DevelopmentSettingsController" />
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="Data saver"
+            android:summary="Data Saver prevents some apps from sending or receiving data in the background">
+            <intent
+                android:targetPackage="com.android.settings"
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.settings.Settings$DataSaverSummaryActivity" />
+        </com.android.settingslib.miuisettings.preference.Preference>
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="Extra dim"
+            android:key="device_more_parameter"
+            android:summary="reduce_bright_colors_preference_summary"
+            android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment" />
+        <com.android.settings.display.DensityPreference
+            android:title="DPI"
+            android:key="density" />
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="Notification History "
+            android:key="notification_history">
+            <intent
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.notification.history.NotificationHistoryActivity" />
+        </com.android.settingslib.miuisettings.preference.Preference>
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="Notification title "
+            android:key="notif_log">
+            <intent
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.Settings$NotificationStationActivity" />
+        </com.android.settingslib.miuisettings.preference.Preference>
+        <com.android.settings.AodValuePreference
+            android:title="Aod notification style "
+            android:key="aod_notification_status"
+            app:userRestriction="no_ambient_display">
+            <intent
+                android:targetPackage="com.miui.aod"
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.miui.aod.settings.NotificationAnimationSelectActivity" />
+        </com.android.settings.AodValuePreference>
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:persistent="false"
+            android:title="Mi beam"
+            android:key="flash_notifications_preference"
+            android:fragment="com.android.settings.accessibility.FlashNotificationsPreferenceFragment"
+            app:controller="com.android.settings.accessibility.FlashNotificationsPreferenceController"
+            app:searchable="false" />
+        <miuix.preference.TextPreference
+            android:title="Notification Bubbles "
+            android:key="miui_bubbles_notification">
+            <intent
+                android:targetPackage="com.miui.securitycenter"
+                android:action="com.miui.bubbles.BUBBLES_SETTINGS" />
+        </miuix.preference.TextPreference>
+        <Preference
+            android:title="Direct Eq"
+            android:summary="Earphone Equalizer">
+            <intent
+                android:action="com.miui.misound.DIRAC_EQUALIZER" />
+        </Preference>
+        <Preference
+            android:title="Privacy Option"
+            android:summary="Permissions, Account Activity, Personal data">
+            <intent
+                android:action="android.settings.PRIVACY_SETTINGS" />
+        </Preference>
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="Notification Access "
+            android:key="notification_access"
+            android:summary="Control Which App and Device Can Read Notifications"
+            android:order="12"
+            android:fragment="com.android.settings.notification.NotificationAccessSettings"
+            app:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="All App"
+            android:summary="Complate Settings, All Application Settings Are Here"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/hypex_copy"
+        android:selectable="false" />
+</PreferenceScreen>

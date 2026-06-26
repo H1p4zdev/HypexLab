@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:layout="@layout/xdashboard"
+        android:layout_width="fill_parent"
+        android:layout_height="150.0dip"
+        android:layout_marginTop="57.0dip"
+        android:layout_marginBottom="3.0dip"
+        android:layout_marginStart="16.0dip"
+        android:layout_marginEnd="16.0dip" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="Status Bar Modification and Customization " />
+    <MyXCheckBoxPreference
+        android:title="Apply settings"
+        android:summary="This will restart the systemui to apply changes"
+        intent="android.intent.action.TIMEZONE_CHANGED" />
+    <PreferenceCategory
+        android:persistent="false">
+        <XMiuiCheckBoxPreference
+            android:title="Expand top notification"
+            android:key="status_bar_expand_top_notification"
+            android:defaultValue="false"
+            android:summaryOn="Enabled"
+            android:summaryOff="Disabled" />
+        <XMiuiCheckBoxPreference
+            android:title="Disable Privacy Chip"
+            android:key="disable_privacy_chip"
+            android:summary="Disable the Camera, Mic &amp; Location privacy chip"
+            android:defaultValue="false" />
+        <MyXDropDownPreference
+            android:title="Status Bar Clock Style"
+            android:key="statusbar_clock_style"
+            android:summary="Restart the systemui to apply"
+            android:defaultValue="default"
+            app:entries="@array/statusbar_style_entries"
+            app:entryValues="@array/statusbar_style_values" />
+        <MyEditTextPreference
+            android:title="Time format"
+            android:key="clock_format_spiderui"
+            android:defaultValue="h:mm"
+            intent="android.intent.action.TIME_TICK" />
+        <Preference
+            android:title="Logo"
+            android:summary="Customize Logo Icon"
+            android:fragment="com.CosUI.settings.CosUIIcons" />
+           
+        <Preference
+            android:title="Time format"
+            android:summary="yyyy - four-digit year(2025)\nyy - two-digit year(23)\nMMMM - long month(August)\nMMM - short month(Aug)\nMM - two-digit month(02、12)\nM - one-digit month(2、12)\ndd - two-digit day(02、23)\nd - one-digit day(2、23)\nE - short week(Sun)\nEEEE - long week(Sunday)\na - AM、PM\naa - Morning, Afternoon, Evening\nHH - 24-hour two-digit hour(09、14)\nH - 24-hour one-digit hour(9、14)\nhh - 12-hour two-digit hour(09、02)\nh - 12-hour one-digit hour(9、2)\nmm - two-digit minute(09)" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/hypex_copy"
+        android:selectable="false" />
+</PreferenceScreen>

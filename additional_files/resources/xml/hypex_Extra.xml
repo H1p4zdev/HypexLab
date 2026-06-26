@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout="@layout/xdashboard" />
+    <PreferenceCategory
+        android:paddingTop="70.0dip"
+        android:layout="@layout/rage_bottom"
+        android:selectable="false"
+        android:summary="Some Useful Features and Customizations " />
+    <PreferenceCategory
+        android:persistent="false">
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="Enable Google assistant/Gemini">
+            <intent
+                android:targetPackage="com.android.settings"
+                android:action="android.intent.action.VIEW"
+                android:targetClass="com.android.settings.Settings$PowerMenuSettingsActivity" />
+        </com.android.settingslib.miuisettings.preference.Preference>
+        <Preference
+            android:title="Default Apps"
+            android:summary="Set all service to Google"
+            android:fragment="com.android.settings.applications.defaultapps.MiuiDefaultAppSettings" />
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="App Vault">
+            <intent
+                android:targetPackage="com.miui.personalassistant"
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.miui.personalassistant.settings.PASettingActivity" />
+        </com.android.settingslib.miuisettings.preference.Preference>
+        <com.android.settingslib.miuisettings.preference.Preference
+            android:title="Change theme server">
+            <intent
+                android:targetPackage="com.android.thememanager"
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.thememanager.activity.ThemePreferenceActivity" />
+        </com.android.settingslib.miuisettings.preference.Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Animation">
+        <XMiuiListPreference
+            android:entries="@array/listview_animation_entries"
+            android:title="Listview Animation"
+            android:key="listview_animation"
+            android:defaultValue="0"
+            android:entryValues="@array/listview_animation_values"
+            intent="my.settings.intent.listview_animation.CHANGE" />
+        <XMiuiSeekBarPreference
+            android:title="Animation Duration"
+            android:key="listview_duration"
+            android:defaultValue="300"
+            enableSummary="true"
+            max="1000"
+            min="100"
+            intent="my.settings.intent.listview_animation.CHANGE" />
+        <XMiuiListPreference
+            android:entries="@array/listview_interpolator_entries"
+            android:title="Listview Interpolator"
+            android:key="listview_interpolator"
+            android:defaultValue="0"
+            android:entryValues="@array/listview_interpolator_values"
+            intent="my.settings.intent.listview_animation.CHANGE" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Animation">
+        <XMiuiCheckBoxPreference
+            android:title="show rotation suggestions"
+            android:key="show_rotation_suggestions"
+            android:defaultValue="false"
+            android:summaryOn="Enable"
+            android:summaryOff="Disable" />
+        <XMiuiCheckBoxPreference
+            android:title="Secure flag"
+            android:key="disable_flag_secure"
+            android:summary="Allow Screenshot in any apps"
+            android:defaultValue="true" />
+        <XMiuiCheckBoxPreference
+            android:title="Max FPS in all apps"
+            android:key="force_max_fps"
+            android:summary="enabling this might increase the battery consumption"
+            android:defaultValue="false" />
+        <XdOverlayCheckBox
+            android:title="Monet Navigation handle"
+            android:key="com.android.systemui.PuiThemeHandleColor"
+            android:summary="Enable Monet Navigation"
+            android:defaultValue="false"
+            debug="false"
+            intent="android.intent.action.TIMEZONE_CHANGED" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/hypex_copy"
+        android:selectable="false" />
+</PreferenceScreen>

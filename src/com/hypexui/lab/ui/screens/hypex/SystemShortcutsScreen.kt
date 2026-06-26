@@ -10,22 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Adb
 import androidx.compose.material.icons.filled.BrightnessLow
 import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.DeveloperMode
-import androidx.compose.material.icons.filled.Equalizer
 import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.NotificationsActive
-import androidx.compose.material.icons.filled.NotificationsOff
 import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.Save
-import androidx.compose.material.icons.filled.Security
-import androidx.compose.material.icons.filled.Sensors
-import androidx.compose.material.icons.filled.SettingsInputHdmi
-import androidx.compose.material.icons.filled.SmartToy
+import androidx.compose.material.icons.filled.Widgets
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -97,7 +89,7 @@ fun SystemShortcutsScreen(
                         onClick = {
                             try {
                                 context.startActivity(
-                                    Intent(android.provider.Settings.ACTION_REDUCE_BRIGHT_COLORS_SETTINGS).apply {
+                                    Intent("android.settings.REDUCE_BRIGHT_COLORS_SETTINGS").apply {
                                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                                     }
                                 )
@@ -178,7 +170,7 @@ fun SystemShortcutsScreen(
                     ClickablePreference(
                         title = "All Apps",
                         summary = "Complete settings, all application settings are here",
-                        icon = Icons.Default.Apps,
+                        icon = Icons.Default.Widgets,
                         showExternalIcon = true,
                         onClick = {
                             try {

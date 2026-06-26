@@ -1,0 +1,10 @@
+# Patch: frameworks/base/services/java/com/android/server/SystemServer.java
+# Target: call HypexHook.initSystemServer() at end of run() method
+#
+# Find in SystemServer.smali:
+#   .method public run()V
+#
+# Insert before return-void at end of method:
+#
+#     invoke-static {}, Landroid/security/hypex/HypexHook;->initSystemServer()V
+

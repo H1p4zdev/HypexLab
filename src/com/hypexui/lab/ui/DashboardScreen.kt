@@ -312,15 +312,65 @@ private fun DashboardContent(
                         modifier = Modifier.weight(1f),
                     )
                     DashboardCard(
-                        title = stringResource(R.string.hypex_mods),
+                        title = "Spoofs",
+                        icon = Icons.Filled.Fingerprint,
+                        onClick = { onNavigateToDetail("hypex_spoofs") },
+                        modifier = Modifier.weight(1f),
+                    )
+                    DashboardCard(
+                        title = "Status Bar",
+                        icon = Icons.Filled.Star,
+                        onClick = { onNavigateToDetail("hypex_statusbar") },
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth().height(118.dp).then(revealModifier),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    DashboardCard(
+                        title = "Control Centre",
+                        icon = Icons.Filled.Settings,
+                        onClick = { onNavigateToDetail("hypex_cc") },
+                        modifier = Modifier.weight(1f),
+                    )
+                    DashboardCard(
+                        title = "Icons & Style",
+                        icon = Icons.Filled.Palette,
+                        onClick = { onNavigateToDetail("hypex_icons") },
+                        modifier = Modifier.weight(1f),
+                    )
+                    DashboardCard(
+                        title = "Extra Mods",
                         icon = Icons.Filled.Extension,
-                        onClick = { onNavigateToDetail("hypex_mods") },
+                        onClick = { onNavigateToDetail("hypex_extra") },
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth().height(118.dp).then(revealModifier),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    DashboardCard(
+                        title = "Shortcuts",
+                        icon = Icons.Filled.Link,
+                        onClick = { onNavigateToDetail("hypex_hidden") },
+                        modifier = Modifier.weight(1f),
+                    )
+                    DashboardCard(
+                        title = "Credits",
+                        icon = Icons.Filled.Info,
+                        onClick = { onNavigateToDetail("hypex_credit") },
                         modifier = Modifier.weight(1f),
                     )
                     Spacer(modifier = Modifier.weight(1f))
                 }
-
-                Spacer(modifier = Modifier.height(12.dp))
 
                 Spacer(modifier = Modifier.height(32.dp))
 
@@ -382,16 +432,10 @@ private fun DetailScreen(
                 onNavigateToAppPicker = onNavigateToAppPicker,
             )
         "multitasking" -> MultitaskingScreen(onBackClick = onBackClick)
-        "hypex_mods" ->
-            HypexModsScreen(
-                onBackClick = onBackClick,
-                onNavigateTo = onNavigateToDetail,
-            )
         "hypex_spoofs" -> SpoofsToolboxScreen(onBackClick = onBackClick)
         "hypex_statusbar" -> StatusBarScreen(onBackClick = onBackClick)
         "hypex_cc" -> ControlCentreScreen(onBackClick = onBackClick)
         "hypex_icons" -> IconsStyleScreen(onBackClick = onBackClick)
-        "hypex_settings" -> SettingsModsScreen(onBackClick = onBackClick)
         "hypex_extra" -> ExtraModsScreen(onBackClick = onBackClick)
         "hypex_hidden" -> SystemShortcutsScreen(onBackClick = onBackClick)
         "hypex_credit" -> CreditsScreen(onBackClick = onBackClick)
@@ -451,16 +495,10 @@ private fun DetailPaneContent(
                 onNavigateToAppPicker = onNavigateToAppPicker,
             )
         "multitasking" -> MultitaskingScreen(onBackClick = onClose)
-        "hypex_mods" ->
-            HypexModsScreen(
-                onBackClick = onClose,
-                onNavigateTo = onNavigateToDetail,
-            )
         "hypex_spoofs" -> SpoofsToolboxScreen(onBackClick = onClose)
         "hypex_statusbar" -> StatusBarScreen(onBackClick = onClose)
         "hypex_cc" -> ControlCentreScreen(onBackClick = onClose)
         "hypex_icons" -> IconsStyleScreen(onBackClick = onClose)
-        "hypex_settings" -> SettingsModsScreen(onBackClick = onClose)
         "hypex_extra" -> ExtraModsScreen(onBackClick = onClose)
         "hypex_hidden" -> SystemShortcutsScreen(onBackClick = onClose)
         "hypex_credit" -> CreditsScreen(onBackClick = onClose)

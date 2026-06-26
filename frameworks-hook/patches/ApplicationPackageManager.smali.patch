@@ -1,0 +1,17 @@
+# Patch: frameworks/base/core/java/android/app/ApplicationPackageManager.java
+# Target: intercept hasSystemFeature() to spoof device features
+#
+# Find in ApplicationPackageManager.smali:
+#   .method public hasSystemFeature(Ljava/lang/String;I)Z
+#
+# Insert at start of method (before any other logic):
+#
+#     invoke-static {p1, p2}, Landroid/security/hypex/HypexHook;->hasSystemFeature(Ljava/lang/String;I)Z
+#     move-result v0
+#     if-eqz v0, :_hypex_skip
+#     const/4 v0, 0x0
+#     return v0
+#     :_hypex_skip
+#
+# Replace original return with fallthrough to original logic.
+

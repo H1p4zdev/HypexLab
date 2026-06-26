@@ -1,0 +1,10 @@
+# Patch: frameworks/base/core/java/android/app/Instrumentation.java
+# Target: callHypexHook_initContext() in callActivityOnCreate
+#
+# Find in Instrumentation.smali:
+#   .method public callActivityOnCreate(Landroid/app/Activity;Landroid/os/Bundle;)V
+#
+# Insert after invoke-super / move-result:
+#
+#     invoke-static {p1}, Landroid/security/hypex/HypexHook;->initContext(Ljava/lang/String;)V
+    

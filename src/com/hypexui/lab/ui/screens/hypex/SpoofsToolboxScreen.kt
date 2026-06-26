@@ -41,12 +41,6 @@ fun SpoofsToolboxScreen(
 
             PreferenceGroup {
                 spoofSwitch(
-                    key = "persist.sys.nexiun.integrity",
-                    title = "Play Integrity Fix",
-                    summary = "This is the spoof method of ZenDroid. Disable to use your own spoof method",
-                    icon = Icons.Default.Fingerprint,
-                )
-                spoofSwitch(
                     key = "persist.sys.nexiun.playstore",
                     title = "Enable Play Store Spoof",
                     summary = "Spoof your device as a Pixel 9 Pro XL for Play Store only",

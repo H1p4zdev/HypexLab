@@ -67,11 +67,7 @@ fun DeviceInfoCards(modifier: Modifier = Modifier) {
         ),
         DeviceInfo(
             label = "Chipset",
-            value = if (Build.VERSION.SDK_INT >= 31) {
-                "${Build.SOC_MANUFACTURER} ${Build.SOC_MODEL}".ifBlank { Build.HARDWARE }
-            } else {
-                Build.HARDWARE
-            }.ifEmpty { "Unknown" },
+            value = friendlyChipsetName(),
             icon = Icons.Filled.Memory,
             accentColor = Color(0xFFFF3D00),
         ),
@@ -102,9 +98,77 @@ fun DeviceInfoCards(modifier: Modifier = Modifier) {
                             item = items[index],
                             modifier = Modifier.weight(1f),
                         )
-                    }
+        }
+    }
+}
+
+private val snapdragonMap = mapOf(
+    "SM4350" to "Snapdragon\u00AE 4 Gen 1",
+    "SM4375" to "Snapdragon\u00AE 4 Gen 2",
+    "SM4450" to "Snapdragon\u00AE 4 Gen 2",
+    "SM4475" to "Snapdragon\u00AE 4 Gen 3",
+    "SM6450" to "Snapdragon\u00AE 6 Gen 1",
+    "SM6475" to "Snapdragon\u00AE 6 Gen 3",
+    "SM7315" to "Snapdragon\u00AE 7 Gen 3",
+    "SM7325" to "Snapdragon\u00AE 7+ Gen 2",
+    "SM7350" to "Snapdragon\u00AE 7 Gen 1",
+    "SM7370" to "Snapdragon\u00AE 7 Gen 1",
+    "SM7435" to "Snapdragon\u00AE 7s Gen 2",
+    "SM7450" to "Snapdragon\u00AE 7 Gen 1",
+    "SM7475" to "Snapdragon\u00AE 7+ Gen 3",
+    "SM7550" to "Snapdragon\u00AE 7s Gen 2",
+    "SM7635" to "Snapdragon\u00AE 7s Gen 3",
+    "SM7675" to "Snapdragon\u00AE 7+ Gen 3",
+    "SM8350" to "Snapdragon\u00AE 888",
+    "SM8350-AC" to "Snapdragon\u00AE 888+",
+    "SM8375" to "Snapdragon\u00AE 888+",
+    "SM8450" to "Snapdragon\u00AE 8 Gen 1",
+    "SM8475" to "Snapdragon\u00AE 8+ Gen 1",
+    "SM8525" to "Snapdragon\u00AE 8cx Gen 3",
+    "SM8550" to "Snapdragon\u00AE 8 Gen 2",
+    "SM8550-AB" to "Snapdragon\u00AE 8 Gen 2",
+    "SM8560" to "Snapdragon\u00AE 8+ Gen 2",
+    "SM8575" to "Snapdragon\u00AE 8 Gen 2",
+    "SM8580" to "Snapdragon\u00AE 8 Gen 2",
+    "SM8650" to "Snapdragon\u00AE 8 Gen 3",
+    "SM8650-AB" to "Snapdragon\u00AE 8 Gen 3",
+    "SM8650P" to "Snapdragon\u00AE 8 Gen 3 for Galaxy",
+    "SM8750" to "Snapdragon\u00AE 8 Elite",
+    "SM8750-AB" to "Snapdragon\u00AE 8 Elite",
+    "SM8750P" to "Snapdragon\u00AE 8 Elite for Galaxy",
+)
+
+private fun friendlyChipsetName(): String {
+    if (Build.VERSION.SDK_INT >= 31) {
+        val manufacturer = Build.SOC_MANUFACTURER
+        val model = Build.SOC_MODEL
+        if (model.isNotBlank()) {
+            val mapped = snapdragonMap[model]
+            if (mapped != null) return mapped
+            if (manufacturer.equals("Qualcomm", ignoreCase = true)) {
+                return "Snapdragon\u00AE ${model.removePrefix("SM")}"
+            }
+            if (manufacturer.equals("MediaTek", ignoreCase = true)) {
+                return when {
+                    model.contains("Dimensity", ignoreCase = true) ||
+                        model.startsWith("MT") -> "MediaTek $model"
+                    else -> "$manufacturer $model"
                 }
             }
+            if (manufacturer.equals("Samsung", ignoreCase = true)) {
+                return "Exynos ${model.removePrefix("Exynos")}"
+            }
+            if (manufacturer.equals("Google", ignoreCase = true)) {
+                return "Google Tensor$model"
+            }
+            return "$manufacturer $model"
+        }
+        if (manufacturer.isNotBlank()) return manufacturer
+    }
+    val hw = Build.HARDWARE
+    if (hw.isNotBlank()) return hw
+    return "Unknown"
+}
             if (rowIndex == 0) Spacer(modifier = Modifier.height(8.dp))
         }
     }
